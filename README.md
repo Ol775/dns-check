@@ -23,10 +23,11 @@
 
 ## What it does
 
-Made for people who send their DNS through [Control D](https://controld.com) and want proof that it's working, but it works for any resolver: the page lists every one that answered.
+Made for people who send their DNS through [Control D](https://controld.com) and want proof that it's working, but it works for any resolver: the page names every one that answered.
 
 - **Leak test.** Your browser looks up 10 random names; the resolvers that ask for them are recorded and shown, with provider and country.
-- **Control D check.** Each resolver is matched against Control D's providers. Anything else turns the banner red.
+- **Provider detection.** Each resolver is named: Control D, Cloudflare (1.1.1.1), NextDNS, Google, Quad9, OpenDNS or AdGuard. Pick the one you expect, or leave it on auto-detect, and anything else turns the banner red.
+- **Provider checks.** Direct confirmation for Cloudflare DNS and NextDNS, using the test hosts those services publish.
 - **Map.** You, your resolvers and any stray resolver on a map.
 - **Filtering check.** Tells you whether an ad and tracker domain is being blocked.
 - **Test log.** The resolver table and a plain-text log of the run, like the results page on dnsleaktest.com.
@@ -107,7 +108,9 @@ No framework and no build step. The only dependency is [Leaflet](https://leaflet
 
 ## Limits
 
-- A resolver counts as Control D if its provider name matches Control D, DataCamp, CDN77 or Windscribe. That's a heuristic: edit the `CONTROLD` pattern in `public/index.html` to match your own setup.
+- Providers are recognised by the organisation name of the resolver's IP address, which is a heuristic. Edit the `PROVIDERS` list in `public/index.html` to add one or fix a match. A resolver that isn't on the list shows as "Unrecognised", which is usually your ISP or router.
+- Cloudflare's family servers (1.1.1.2 and 1.1.1.3) look the same as 1.1.1.1 from a browser, so they can't be told apart.
+- The NextDNS check needs NextDNS's test page to be readable from a browser; if it isn't, the check says "Not detected" even when you are on NextDNS.
 - It reports the resolvers that answered during the run. A leak that only shows up in certain apps, or when a VPN toggles, can be missed.
 - A VPN or iCloud Private Relay changes what you see.
 - DNSSEC isn't tested: no public test host has a valid HTTPS certificate, so a browser can't tell a DNS refusal from a certificate error.

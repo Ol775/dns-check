@@ -27,7 +27,7 @@ const challenge = sitekey => new Response(`<!doctype html><html lang="en"><head>
 <svg width="56" height="56" viewBox="0 0 32 32" aria-hidden="true"><defs><linearGradient id="lg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#3b82f6"/><stop offset="1" stop-color="#0ea5a4"/></linearGradient></defs><rect width="32" height="32" rx="8" fill="url(#lg)"/><g fill="none" stroke="#fff" stroke-opacity=".3"><circle cx="16" cy="16.5" r="12"/><circle cx="16" cy="16.5" r="8.5"/></g><path d="M16 5.5 7.5 8.6v6.6c0 5.2 3.5 8.7 8.5 10.9 5-2.2 8.5-5.7 8.5-10.9V8.6z" fill="#fff"/><path d="m11.9 15.8 3 3 5.4-5.9" fill="none" stroke="#0e8fa6" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
 <h1>DNS Check</h1><p>Quick check that you're human, then the test runs.</p>
 <div class="cf-turnstile" data-sitekey="${sitekey}" data-callback="ok" data-error-callback="bad"></div>
-<div id="err" role="alert"></div><p style="margin-top:32px;font-size:.85rem"><a href="/privacy" style="color:var(--mut)">Privacy and terms</a></p></main>
+<div id="err" role="alert"></div><p style="margin-top:32px;font-size:.85rem"><a href="/privacy" style="color:var(--mut)">Privacy and terms</a> · <a href="https://github.com/Ol775/dns-check" rel="noopener" style="color:var(--mut)">Source on GitHub</a></p></main>
 <script>
 async function ok(token){
   const r = await fetch('/verify',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({token})});
