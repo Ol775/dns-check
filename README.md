@@ -27,7 +27,7 @@ Made for people who send their DNS through [Control D](https://controld.com) and
 
 - **Leak test.** Your browser looks up 10 random names; the resolvers that ask for them are recorded and shown, with provider and country.
 - **Provider detection.** Each resolver is named: Control D, Cloudflare (1.1.1.1), NextDNS, Google, Quad9, OpenDNS or AdGuard. Pick the one you expect, or leave it on auto-detect, and anything else turns the banner red.
-- **Provider checks.** Direct confirmation for Cloudflare DNS and NextDNS, using the test hosts those services publish.
+- **Provider check.** Direct confirmation for Cloudflare DNS, using the test host Cloudflare publishes.
 - **Map.** You, your resolvers and any stray resolver on a greyscale map, so the pins are the only colour.
 - **Filtering check.** Tells you whether an ad and tracker domain is being blocked.
 - **Test log.** The resolver table and a plain-text log of the run, like the results page on dnsleaktest.com.
@@ -78,7 +78,7 @@ cp .dev.vars.example .dev.vars
 npx wrangler dev
 ```
 
-`.dev.vars.example` holds Cloudflare's published [test keys](https://developers.cloudflare.com/turnstile/troubleshooting/testing/): the secret always passes, and the matching test sitekey overrides the real one in `wrangler.jsonc` while you run locally. Open `http://localhost:8787`.
+`.dev.vars.example` holds Cloudflare's published [test keys](https://developers.cloudflare.com/turnstile/troubleshooting/testing/) (the secret always passes, and the matching test sitekey overrides the real one in `wrangler.jsonc`) plus a throwaway cookie key, for local use only. Open `http://localhost:8787`.
 
 ## Deploy your own
 
@@ -89,7 +89,10 @@ npx wrangler dev
 ```bash
 npx wrangler deploy
 npx wrangler secret put TURNSTILE_SECRET
+openssl rand -hex 32 | npx wrangler secret put COOKIE_SECRET
 ```
+
+`COOKIE_SECRET` signs the access cookie and is separate from the Turnstile secret. Without both secrets the Worker serves nothing.
 
 If the domain sits behind Cloudflare Access, add a bypass for it or visitors will hit the Access login first.
 
@@ -111,10 +114,20 @@ No framework and no build step (`ui.js` holds the translations; the privacy page
 
 - Providers are recognised by the organisation name of the resolver's IP address, which is a heuristic. Edit the `PROVIDERS` list in `public/index.html` to add one or fix a match. A resolver that isn't on the list shows as "Unrecognised", which is usually your ISP or router.
 - Cloudflare's family servers (1.1.1.2 and 1.1.1.3) look the same as 1.1.1.1 from a browser, so they can't be told apart.
-- The NextDNS check needs NextDNS's test page to be readable from a browser; if it isn't, the check says "Not detected" even when you are on NextDNS.
+- NextDNS is recognised by the resolver's name only: its test page sends no CORS headers, so a browser can't read it for a direct confirmation.
 - It reports the resolvers that answered during the run. A leak that only shows up in certain apps, or when a VPN toggles, can be missed.
 - A VPN or iCloud Private Relay changes what you see.
 - DNSSEC isn't tested: no public test host has a valid HTTPS certificate, so a browser can't tell a DNS refusal from a certificate error.
+
+## Security
+
+- Every URL serves the challenge until a valid signed cookie is presented; forged, tampered and expired cookies are rejected (HttpOnly, Secure, SameSite=Lax, one hour).
+- Strict CSP (no inline scripts, an allow-list of the hosts the app talks to), HSTS, `X-Frame-Options: DENY`, `nosniff`, a referrer policy and a permissions policy on every response.
+- `/verify` caps the body (4 KB) and token (2048 characters), and is rate limited to 10 attempts a minute per IP. Cloudflare's rate limiter is per location and approximate: it blunts abuse rather than guaranteeing a hard cap.
+- Values from third-party services are escaped or set as plain text, never inserted as HTML.
+- The Turnstile script can't be pinned with an integrity hash, because Cloudflare serves it dynamically; Leaflet is pinned.
+
+Found a problem? Please message Ol775 on GitHub rather than opening a public issue.
 
 ## Privacy
 

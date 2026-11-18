@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="robots" content="noindex">
 <title>Privacy and terms · DNS Check</title>
-<script>try{var m=localStorage.getItem('dnsck-theme');if(m==='light'||m==='dark')document.documentElement.setAttribute('data-theme',m)}catch(e){}</script>
+<script src="/theme-init.js"></script>
 <link rel="icon" href="/favicon.ico" sizes="48x48"><link rel="icon" href="/icon.svg" type="image/svg+xml"><link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <style>
   :root { color-scheme:light dark; --bg:#f5f6f8; --fg:#16181c; --mut:#667085; --card:#fff; --line:#e4e7ec; --me:#2563eb; --onme:#fff; }
@@ -49,6 +49,7 @@
       <tr><td>geojs.io</td><td>Places you and your resolvers on the map</td><td>Your IP address and your resolvers' IP addresses. <a href="https://www.geojs.io/">geojs.io</a></td></tr>
       <tr><td>OpenStreetMap</td><td>Map tiles</td><td>Your IP address and the area of the map you view. <a href="https://osmfoundation.org/wiki/Privacy_Policy">OSMF privacy policy</a></td></tr>
       <tr><td>cdnjs (Cloudflare)</td><td>Loads the Leaflet map library</td><td>Your IP address</td></tr>
+      <tr><td>help.one.one.one.one (Cloudflare)</td><td>The Cloudflare DNS check tries to load it: the name only resolves on Cloudflare's resolvers</td><td>Your IP address</td></tr>
       <tr><td>doubleclick.net and example.com</td><td>The ad-blocking check tries to load each to see whether your DNS blocks it</td><td>Your IP address. doubleclick.net is an advertising domain, so if your DNS isn't blocking it, that request reaches Google's ad network.</td></tr>
     </tbody>
   </table>
