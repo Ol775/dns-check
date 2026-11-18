@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>Privacy and terms · DNS Check</title>
+<link rel="icon" href="/favicon.ico" sizes="48x48"><link rel="icon" href="/icon.svg" type="image/svg+xml"><link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<style>
+  :root { --bg:#f5f6f8; --fg:#16181c; --mut:#667085; --card:#fff; --line:#e4e7ec; --me:#2563eb; }
+  @media (prefers-color-scheme: dark) { :root { --bg:#0e0f12; --fg:#ececf0; --mut:#9aa1ad; --card:#17191d; --line:#2a2d33; --me:#6ea0ff; } }
+  body { margin:0; background:var(--bg); color:var(--fg); font:16px/1.6 system-ui,-apple-system,sans-serif; }
+  main { max-width:720px; margin:0 auto; padding:24px 16px 48px; }
+  a { color:var(--me); } a:focus-visible { outline:3px solid var(--me); outline-offset:2px; border-radius:4px; }
+  h1 { font-size:1.5rem; margin:16px 0 4px; } h2 { font-size:1.1rem; margin:28px 0 6px; }
+  .mut { color:var(--mut); } p, ul { margin:0 0 12px; } ul { padding-left:20px; }
+  table { width:100%; border-collapse:collapse; font-size:.9rem; margin:8px 0 12px; display:block; overflow-x:auto; }
+  th, td { text-align:left; padding:8px 12px 8px 0; border-bottom:1px solid var(--line); vertical-align:top; }
+  th { color:var(--mut); font-weight:600; }
+  code { font:.9em ui-monospace,Menlo,monospace; }
+</style>
+</head>
+<body>
+<main>
+  <p><a href="/">← Back to DNS Check</a></p>
+  <h1>Privacy and terms</h1>
+  <p class="mut">Last updated 18 November 2026</p>
+
+  <h2>What this is</h2>
+  <p>DNS Check is a free tool that shows which DNS resolvers your device is using, so you can see whether you're using Control D and whether anything else is answering. It's run by Ol775 as a personal project, with no accounts and no adverts. It isn't affiliated with Control D.</p>
+
+  <h2>What this site keeps</h2>
+  <ul>
+    <li><strong>Nothing about you in a database.</strong> The site has no accounts, no analytics and no tracking, and it doesn't store test results.</li>
+    <li><strong>One cookie, <code>dnsck</code>.</strong> After you pass the human check it records that you passed, so you aren't asked again for an hour. It holds an expiry time and a signature, no personal data. It's strictly necessary, HttpOnly, and expires after one hour.</li>
+    <li>Your browser may keep ordinary cached copies of the page, like any website.</li>
+  </ul>
+
+  <h2>Who else sees your data</h2>
+  <p>The test works by your browser contacting other services. Each sees your IP address as part of making the request, and the ones that need more are listed here:</p>
+  <table>
+    <thead><tr><th>Service</th><th>Why</th><th>What it sees</th></tr></thead>
+    <tbody>
+      <tr><td>Cloudflare (hosting and Turnstile)</td><td>Serves this site and checks you're human</td><td>Your IP address, browser details and the signals Turnstile uses. Cloudflare keeps standard request logs. <a href="https://www.cloudflare.com/privacypolicy/">Cloudflare's privacy policy</a></td></tr>
+      <tr><td>bash.ws</td><td>The leak test: it runs the DNS servers that record which resolvers asked</td><td>Your IP address, the IP of each DNS resolver you use, and a random test ID. <a href="https://bash.ws/">bash.ws</a></td></tr>
+      <tr><td>geojs.io</td><td>Places you and your resolvers on the map</td><td>Your IP address and your resolvers' IP addresses. <a href="https://www.geojs.io/">geojs.io</a></td></tr>
+      <tr><td>OpenStreetMap</td><td>Map tiles</td><td>Your IP address and the area of the map you view. <a href="https://osmfoundation.org/wiki/Privacy_Policy">OSMF privacy policy</a></td></tr>
+      <tr><td>cdnjs (Cloudflare)</td><td>Loads the Leaflet map library</td><td>Your IP address</td></tr>
+      <tr><td>doubleclick.net and example.com</td><td>The ad-blocking check tries to load each to see whether your DNS blocks it</td><td>Your IP address. doubleclick.net is an advertising domain, so if your DNS isn't blocking it, that request reaches Google's ad network.</td></tr>
+    </tbody>
+  </table>
+  <p>I don't control these services, and what they do with your data is covered by their own policies.</p>
+
+  <h2>Legal basis and your rights</h2>
+  <p>Where UK or EU data protection law applies, the basis is legitimate interests: running a diagnostic tool you chose to use and keeping it free of bots. Because this site doesn't store personal data itself, there's nothing for me to export or delete, but you can ask. You can complain to the <a href="https://ico.org.uk/">Information Commissioner's Office</a>.</p>
+
+  <h2>Terms of use</h2>
+  <ul>
+    <li>The tool is provided as is, with no warranty. Results are a guide and can be wrong or incomplete: a VPN, iCloud Private Relay, your network or an unusual setup can change them, and a resolver is only identified as Control D by its provider name.</li>
+    <li>It isn't security or legal advice. Don't rely on it as proof of privacy or anonymity.</li>
+    <li>Please don't abuse it: no automated or bulk use, and no attempts to overload or bypass the human check. Access may be blocked or removed at any time.</li>
+    <li>To the extent the law allows, I'm not liable for any loss arising from using it.</li>
+  </ul>
+
+  <h2>Contact</h2>
+  <p>Questions or requests: message Ol775 on GitHub.</p>
+</main>
+</body>
+</html>

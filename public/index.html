@@ -1,0 +1,203 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>DNS Check</title>
+<link rel="icon" href="/favicon.ico" sizes="48x48"><link rel="icon" href="/icon.svg" type="image/svg+xml"><link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css" integrity="sha384-c6Rcwz4e4CITMbu/NBmnNS8yN2sC3cUElMEMfP3vqqKFp7GOYaaBBCqmaWBjmkjb" crossorigin="anonymous">
+<style>
+  :root {
+    --bg:#f5f6f8; --fg:#16181c; --mut:#667085; --card:#fff; --line:#e4e7ec;
+    --ok:#12805c; --okbg:#e3f5ee; --bad:#c0262d; --badbg:#fdeaea; --warn:#a15c00; --warnbg:#fff3df; --me:#2563eb;
+  }
+  @media (prefers-color-scheme: dark) { :root {
+    --bg:#0e0f12; --fg:#ececf0; --mut:#9aa1ad; --card:#17191d; --line:#2a2d33;
+    --ok:#4cc79a; --okbg:#10291f; --bad:#ff7b80; --badbg:#2d1517; --warn:#f0b45a; --warnbg:#2b2112; --me:#6ea0ff;
+  } }
+  * { box-sizing:border-box; }
+  body { margin:0; background:var(--bg); color:var(--fg); font:16px/1.5 system-ui,-apple-system,sans-serif; }
+  main { max-width:1000px; margin:0 auto; padding:24px 16px 40px; }
+  header { display:flex; justify-content:space-between; align-items:center; gap:12px; margin-bottom:16px; }
+  h1 { font-size:1.35rem; margin:0; }
+  .brand { display:flex; align-items:center; gap:12px; } .logo { width:44px; height:44px; flex:none; }
+  .stamp { color:var(--mut); font-size:.85rem; }
+  h2 { font-size:.75rem; letter-spacing:.06em; text-transform:uppercase; color:var(--mut); margin:0 0 10px; font-weight:600; }
+  button { font:inherit; font-weight:600; padding:10px 16px; border-radius:10px; border:1px solid var(--line); background:var(--card); color:var(--fg); cursor:pointer; min-height:44px; }
+  button:hover { border-color:var(--mut); }
+  button:focus-visible { outline:3px solid var(--me); outline-offset:2px; }
+  button:disabled { opacity:.6; cursor:wait; }
+
+  .hero { border-radius:16px; padding:20px; margin-bottom:16px; border:1px solid var(--line); background:var(--card); display:flex; gap:16px; align-items:center; }
+  .hero .icon { width:52px; height:52px; border-radius:50%; display:grid; place-items:center; font-size:1.6rem; flex:none; }
+  .hero .t { font-size:1.25rem; font-weight:700; line-height:1.25; }
+  .hero .s { color:var(--mut); }
+  .hero.ok { background:var(--okbg); border-color:transparent; } .hero.ok .icon { background:var(--ok); color:#fff; }
+  .hero.bad { background:var(--badbg); border-color:transparent; } .hero.bad .icon { background:var(--bad); color:#fff; }
+  .hero.warn { background:var(--warnbg); border-color:transparent; } .hero.warn .icon { background:var(--warn); color:#fff; }
+  .hero.run .icon { background:var(--line); color:var(--mut); }
+
+  .grid { display:grid; grid-template-columns:minmax(0,1fr) minmax(0,1.3fr); gap:16px; }
+  @media (max-width:760px) { .grid { grid-template-columns:1fr; } }
+  .stack { display:grid; gap:16px; align-content:start; }
+  .card { background:var(--card); border:1px solid var(--line); border-radius:16px; padding:16px; }
+  .kv { display:grid; grid-template-columns:auto 1fr; gap:4px 16px; margin:0; }
+  .kv dt { color:var(--mut); } .kv dd { margin:0; text-align:right; overflow-wrap:anywhere; }
+  ul.res { list-style:none; margin:0; padding:0; display:grid; gap:8px; }
+  ul.res li { display:grid; grid-template-columns:auto 1fr; gap:2px 10px; align-items:start; padding:10px 12px; border-radius:10px; background:var(--bg); }
+  ul.res .dot { width:10px; height:10px; border-radius:50%; margin-top:7px; }
+  ul.res .org { font-weight:600; }
+  ul.res .meta { grid-column:2; color:var(--mut); font-size:.875rem; overflow-wrap:anywhere; }
+  .tag { font-size:.7rem; font-weight:700; padding:1px 7px; border-radius:99px; margin-left:6px; vertical-align:middle; }
+  .tag.ok { background:var(--okbg); color:var(--ok); } .tag.bad { background:var(--badbg); color:var(--bad); }
+  #map { flex:1; min-height:340px; border-radius:12px; background:var(--bg); }
+  .mapcard { padding:8px; display:flex; flex-direction:column; } .mapcard #map { min-height:420px; }
+  @media (prefers-color-scheme: dark) { .leaflet-tile-pane { filter:invert(1) hue-rotate(180deg) brightness(.9) contrast(.9); } .leaflet-container a { color:var(--me); } }
+  details.log summary { cursor:pointer; font-weight:600; } details.log summary:focus-visible { outline:3px solid var(--me); outline-offset:2px; }
+  .tbl { width:100%; border-collapse:collapse; margin-top:12px; font-size:.875rem; } .tbl th { text-align:left; color:var(--mut); font-weight:600; } .tbl th, .tbl td { padding:6px 8px 6px 0; border-bottom:1px solid var(--line); vertical-align:top; overflow-wrap:anywhere; }
+  .tblwrap { overflow-x:auto; }
+  pre.raw { margin:12px 0 0; padding:12px; background:var(--bg); border-radius:10px; font:12px/1.5 ui-monospace,Menlo,monospace; overflow-x:auto; white-space:pre-wrap; overflow-wrap:anywhere; color:var(--mut); }
+  .pin { width:16px; height:16px; border-radius:50%; border:3px solid #fff; box-shadow:0 1px 4px rgba(0,0,0,.45); }
+  .legend { display:flex; gap:14px; flex-wrap:wrap; color:var(--mut); font-size:.85rem; padding:10px 8px 4px; }
+  .legend i { display:inline-block; width:10px; height:10px; border-radius:50%; margin-right:5px; }
+  small.note a { color:var(--me); }
+  small.note { display:block; color:var(--mut); margin:20px 4px 0; font-size:.8rem; line-height:1.5; max-width:70ch; }
+  @media (prefers-reduced-motion: no-preference) { .hero.run .icon { animation:pulse 1.2s ease-in-out infinite; } @keyframes pulse { 50% { opacity:.45; } } }
+</style>
+</head>
+<body>
+<main>
+  <header>
+    <div class="brand"><svg class="logo" viewBox="0 0 32 32" aria-hidden="true"><defs><linearGradient id="lg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#3b82f6"/><stop offset="1" stop-color="#0ea5a4"/></linearGradient></defs><rect width="32" height="32" rx="8" fill="url(#lg)"/><g fill="none" stroke="#fff" stroke-opacity=".3" stroke-width="1"><circle cx="16" cy="16.5" r="12"/><circle cx="16" cy="16.5" r="8.5"/></g><path d="M16 5.5 7.5 8.6v6.6c0 5.2 3.5 8.7 8.5 10.9 5-2.2 8.5-5.7 8.5-10.9V8.6z" fill="#fff"/><path d="m11.9 15.8 3 3 5.4-5.9" fill="none" stroke="#0e8fa6" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg><div><h1>DNS Check</h1><div class="stamp" id="stamp"></div></div></div>
+    <button id="rerun">Run again</button>
+  </header>
+
+  <section class="hero run" id="hero" aria-live="polite">
+    <div class="icon" aria-hidden="true">…</div>
+    <div><div class="t">Checking your DNS…</div><div class="s">Sending 10 test lookups</div></div>
+  </section>
+
+  <div class="grid">
+    <div class="stack">
+      <section class="card"><h2>Your connection</h2><dl class="kv" id="you"><dt>Public IP</dt><dd>–</dd></dl></section>
+      <section class="card"><h2>Resolvers that answered</h2><ul class="res" id="resolvers"><li><span></span><span>–</span></li></ul></section>
+      <section class="card"><h2>Filtering</h2><ul class="res" id="checks"><li><span></span><span>–</span></li></ul></section>
+    </div>
+    <section class="card mapcard">
+      <div id="map" role="img" aria-label="Map showing your location and the DNS resolvers that answered"></div>
+      <div class="legend"><span><i style="background:var(--me)"></i>You</span><span><i style="background:var(--ok)"></i>Control D</span><span><i style="background:var(--bad)"></i>Other resolver</span></div>
+    </section>
+  </div>
+
+  <section class="card" style="margin-top:16px"><details class="log"><summary>Test log</summary>
+    <div class="tblwrap"><table class="tbl"><thead><tr><th>IP</th><th>Provider</th><th>Country</th><th>Result</th></tr></thead><tbody id="logrows"><tr><td colspan="4">Waiting for results…</td></tr></tbody></table></div>
+    <pre class="raw" id="logtext" tabindex="0"></pre>
+  </details></section>
+
+  <small class="note">Looks up 10 random names under bash.ws, which records the resolvers that asked. Locations come from geojs.io and are approximate.
+  Both services see your IP and resolver, nothing else. VPNs and iCloud Private Relay change the result. <a href="/privacy">Privacy and terms</a></small>
+</main>
+<script src="/cookie-notice.js" defer></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js" integrity="sha384-NElt3Op+9NBMCYaef5HxeJmU4Xeard/Lku8ek6hoPTvYkQPh3zLIrJP7KiRocsxO" crossorigin="anonymous"></script>
+<script>
+const N = 10;
+const CONTROLD = /control ?d|datacamp|windscribe|cdn77/i; // resolver orgs treated as Control D; add yours if flagged wrongly
+const esc = s => String(s ?? '').replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const sleep = ms => new Promise(r => setTimeout(r, ms));
+const css = v => getComputedStyle(document.documentElement).getPropertyValue(v).trim();
+
+// map: one instance, markers cleared per run; tiles follow the colour scheme
+let map, layer;
+function initMap() {
+  if (typeof L === 'undefined') { document.getElementById('map').textContent = 'Map unavailable (could not load Leaflet).'; return; }
+  map = L.map('map', { worldCopyJump: true }).setView([30, 10], 2);
+  layer = L.layerGroup().addTo(map);
+  L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', { maxZoom: 12, attribution: '© OpenStreetMap contributors' }).addTo(map); // dark mode: see .leaflet-tile-pane filter
+}
+const pin = (p, colour, label) => L.marker(p, { title: label, icon: L.divIcon({ className: '', iconSize: [16, 16], html: `<div class="pin" style="background:${colour}"></div>` }) }).bindPopup(label).addTo(layer);
+
+async function geo(ips) { // [{ip,latitude,longitude,city}] in input order; failures just get no marker
+  try {
+    const r = await (await fetch(`https://get.geojs.io/v1/ip/geo.json?ip=${ips.join(',')}`, { signal: AbortSignal.timeout(6000) })).json();
+    return Array.isArray(r) ? r : [r];
+  } catch { return []; }
+}
+
+function hero(cls, icon, title, sub) {
+  document.getElementById('hero').className = `hero ${cls}`;
+  document.getElementById('hero').innerHTML = `<div class="icon" aria-hidden="true">${icon}</div><div><div class="t">${esc(title)}</div><div class="s">${esc(sub)}</div></div>`;
+}
+
+// can a request to this host connect? (no-cors: only success/failure is visible, which is all we need)
+const reach = u => fetch(u, { mode: 'no-cors', cache: 'no-store', signal: AbortSignal.timeout(6000) }).then(() => true, () => false);
+
+// filtering: doubleclick.net is on every ad/tracker list; example.com is the control that proves we're online
+// (DNSSEC isn't tested here: no public test host has a valid HTTPS cert, so a browser can't tell refusal from cert failure)
+async function otherChecks() {
+  const [ad, ctl] = await Promise.all(['https://doubleclick.net', 'https://example.com'].map(reach));
+  const items = [];
+  if (!ctl) items.push(['warn', 'Ad and tracker blocking', 'Inconclusive: you appear to be offline.']);
+  else items.push(ad ? ['warn', 'Ad and tracker blocking', 'Not blocking: doubleclick.net resolved. Fine if you did not enable filters.'] : ['ok', 'Ad and tracker blocking', 'Active: doubleclick.net was blocked (a browser ad blocker could also cause this).']);
+  checks.innerHTML = items.map(([c, t, m]) => `<li><span class="dot" style="background:var(--${c})"></span><span class="org">${esc(t)}</span><span class="meta">${esc(m)}</span></li>`).join('');
+}
+
+async function run() {
+  rerun.disabled = true;
+  checks.innerHTML = '<li><span></span><span>Checking…</span></li>';
+  otherChecks();
+  hero('run', '…', 'Checking your DNS…', `Sending ${N} test lookups`);
+  layer?.clearLayers();
+  try {
+    const id = Array.from(crypto.getRandomValues(new Uint8Array(8)), b => b.toString(16).padStart(2, '0')).join(''); // any random id works; bash.ws/id has no CORS
+    // the lookups are the test; no-cors because we only need the DNS query to happen
+    await Promise.all(Array.from({ length: N }, (_, i) =>
+      fetch(`https://${i + 1}.${id}.bash.ws`, { mode: 'no-cors', cache: 'no-store', signal: AbortSignal.timeout(6000) }).catch(() => {})));
+    await sleep(1500);
+    const r = await (await fetch(`https://bash.ws/dnsleak/test/${id}?json`, { cache: 'no-store' })).json();
+    const me = r.find(x => x.type === 'ip');
+    const dns = r.filter(x => x.type === 'dns').map(x => ({ ...x, ours: CONTROLD.test(x.org + x.asn) }));
+    const other = dns.filter(x => !x.ours);
+    document.getElementById('logrows').innerHTML = dns.map(x => `<tr><td>${esc(x.ip)}</td><td>${esc(x.org)} (${esc(x.asn.split(' ')[0])})</td><td>${esc(x.country_name)}</td><td style="color:var(--${x.ours ? 'ok' : 'bad'})">${x.ours ? 'Control D' : 'Not Control D'}</td></tr>`).join('') || '<tr><td colspan="4">No resolvers reported</td></tr>';
+    document.getElementById('logtext').textContent = [
+      `${new Date().toISOString()}  test id ${id}`,
+      `sent ${N} lookups: 1.${id}.bash.ws … ${N}.${id}.bash.ws`,
+      `your IP: ${me?.ip} (${me?.org})`,
+      ...dns.map(x => `resolver: ${x.ip}  ${x.asn}  ${x.country_name}  -> ${x.ours ? 'Control D' : 'NOT Control D'}`),
+    ].join('\n');
+
+    if (!dns.length) hero('warn', '?', 'No resolvers reported', 'Nothing answered in time. Run it again.');
+    else if (other.length) hero('bad', '✗', 'Possible DNS leak', `${other.length} resolver${other.length > 1 ? 's' : ''} other than Control D answered.`);
+    else hero('ok', '✓', 'Using Control D, no leaks', `${dns.length} resolver${dns.length > 1 ? 's' : ''} answered, all Control D.`);
+
+    document.getElementById('you').innerHTML =
+      `<dt>Public IP</dt><dd>${esc(me?.ip)}</dd><dt>Network</dt><dd>${esc(me?.org)}</dd><dt>Country</dt><dd>${esc(me?.country_name)}</dd>`;
+    document.getElementById('resolvers').innerHTML = dns.map(x =>
+      `<li><span class="dot" style="background:var(--${x.ours ? 'ok' : 'bad'})"></span>
+        <span class="org">${esc(x.org)}<span class="tag ${x.ours ? 'ok' : 'bad'}">${x.ours ? 'Control D' : 'OTHER'}</span></span>
+        <span class="meta">${esc(x.ip)} · ${esc(x.country_name)}</span></li>`).join('') || '<li><span></span><span>None</span></li>';
+
+    if (map) {
+      const pts = await geo([me?.ip, ...dns.map(x => x.ip)].filter(Boolean));
+      const bounds = [];
+      pts.forEach((g, i) => {
+        const p = [parseFloat(g.latitude), parseFloat(g.longitude)];
+        if (isNaN(p[0]) || isNaN(p[1])) return;
+        const isMe = me && i === 0;
+        const d = isMe ? null : dns[i - 1];
+        pin(p, isMe ? css('--me') : css(d.ours ? '--ok' : '--bad'), isMe ? `You${g.city ? ' · ' + g.city : ''}` : `${d.org}${g.city ? ' · ' + g.city : ''}`);
+        bounds.push(p);
+      });
+      if (bounds.length) map.fitBounds(bounds, { padding: [50, 50], maxZoom: 7 });
+    }
+  } catch (e) {
+    hero('bad', '!', 'Test failed', e.message);
+  }
+  document.getElementById("stamp").textContent = `Last run ${new Date().toLocaleTimeString()}`;
+  rerun.disabled = false;
+}
+rerun.onclick = run;
+initMap();
+run();
+</script>
+</body>
+</html>
