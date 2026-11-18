@@ -5,10 +5,13 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="robots" content="noindex">
 <title>Privacy and terms · DNS Check</title>
+<script>try{var m=localStorage.getItem('dnsck-theme');if(m==='light'||m==='dark')document.documentElement.setAttribute('data-theme',m)}catch(e){}</script>
 <link rel="icon" href="/favicon.ico" sizes="48x48"><link rel="icon" href="/icon.svg" type="image/svg+xml"><link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <style>
-  :root { --bg:#f5f6f8; --fg:#16181c; --mut:#667085; --card:#fff; --line:#e4e7ec; --me:#2563eb; }
-  @media (prefers-color-scheme: dark) { :root { --bg:#0e0f12; --fg:#ececf0; --mut:#9aa1ad; --card:#17191d; --line:#2a2d33; --me:#6ea0ff; } }
+  :root { color-scheme:light dark; --bg:#f5f6f8; --fg:#16181c; --mut:#667085; --card:#fff; --line:#e4e7ec; --me:#2563eb; --onme:#fff; }
+  :root[data-theme="light"] { color-scheme:light; }
+  @media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) { --bg:#0e0f12; --fg:#ececf0; --mut:#9aa1ad; --card:#17191d; --line:#2a2d33; --me:#6ea0ff; --onme:#0e0f12; } }
+  :root[data-theme="dark"] { color-scheme:dark; --bg:#0e0f12; --fg:#ececf0; --mut:#9aa1ad; --card:#17191d; --line:#2a2d33; --me:#6ea0ff; --onme:#0e0f12; }
   body { margin:0; background:var(--bg); color:var(--fg); font:16px/1.6 system-ui,-apple-system,sans-serif; }
   main { max-width:720px; margin:0 auto; padding:24px 16px 48px; }
   a { color:var(--me); } a:focus-visible { outline:3px solid var(--me); outline-offset:2px; border-radius:4px; }
@@ -22,7 +25,7 @@
 </head>
 <body>
 <main>
-  <p><a href="/">← Back to DNS Check</a></p>
+  <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap"><a href="/">← Back to DNS Check</a><div data-dnsck-controls="theme"></div></div>
   <h1>Privacy and terms</h1>
   <p class="mut">Last updated 18 November 2026</p>
 
@@ -65,5 +68,6 @@
   <h2>Contact</h2>
   <p>Questions or requests: message Ol775 on GitHub. The source code is public at <a href="https://github.com/Ol775/dns-check" rel="noopener">github.com/Ol775/dns-check</a>.</p>
 </main>
+<script src="/ui.js"></script>
 </body>
 </html>

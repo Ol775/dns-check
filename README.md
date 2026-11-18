@@ -28,11 +28,11 @@ Made for people who send their DNS through [Control D](https://controld.com) and
 - **Leak test.** Your browser looks up 10 random names; the resolvers that ask for them are recorded and shown, with provider and country.
 - **Provider detection.** Each resolver is named: Control D, Cloudflare (1.1.1.1), NextDNS, Google, Quad9, OpenDNS or AdGuard. Pick the one you expect, or leave it on auto-detect, and anything else turns the banner red.
 - **Provider checks.** Direct confirmation for Cloudflare DNS and NextDNS, using the test hosts those services publish.
-- **Map.** You, your resolvers and any stray resolver on a map.
+- **Map.** You, your resolvers and any stray resolver on a greyscale map, so the pins are the only colour.
 - **Filtering check.** Tells you whether an ad and tracker domain is being blocked.
 - **Test log.** The resolver table and a plain-text log of the run, like the results page on dnsleaktest.com.
 - **Bot check.** Cloudflare Turnstile guards the page, verified by the Worker, not just shown.
-- **Light and dark mode**, phone friendly, no accounts, no analytics.
+- **System, light and dark theme** switcher, and **11 languages** (English, French, German, Spanish, Italian, Brazilian Portuguese, Dutch, Japanese, Korean, Simplified and Traditional Chinese) with the same flag picker as my other projects. Phone friendly, no accounts, no analytics.
 
 <div align="center">
 <picture>
@@ -99,12 +99,13 @@ If the domain sits behind Cloudflare Access, add a bypass for it or visitors wil
 src/worker.js          Turnstile gate: /verify, signed cookie, public paths
 public/index.html      the whole app: one file, inline CSS and JS
 public/privacy.html    privacy policy and terms
+public/ui.js           theme + language switchers and every UI string
 public/cookie-notice.js  informational cookie notice
 public/icon.svg …      logo and favicons
 wrangler.jsonc         Worker config
 ```
 
-No framework and no build step. The only dependency is [Leaflet](https://leafletjs.com) for the map, loaded from cdnjs with integrity hashes.
+No framework and no build step (`ui.js` holds the translations; the privacy page is English only). The only dependency is [Leaflet](https://leafletjs.com) for the map, loaded from cdnjs with integrity hashes.
 
 ## Limits
 
