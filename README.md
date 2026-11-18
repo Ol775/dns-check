@@ -74,11 +74,11 @@ You need Node 20+ and a Cloudflare account only if you deploy.
 ```bash
 git clone https://github.com/Ol775/dns-check.git
 cd dns-check
-echo 'TURNSTILE_SECRET=1x0000000000000000000000000000000AA' > .dev.vars
+cp .dev.vars.example .dev.vars
 npx wrangler dev
 ```
 
-`.dev.vars` uses Cloudflare's published [test secret](https://developers.cloudflare.com/turnstile/troubleshooting/testing/), which always passes. Set `TURNSTILE_SITEKEY` in [`wrangler.jsonc`](wrangler.jsonc) to the matching test sitekey `1x00000000000000000000AA` for local use.
+`.dev.vars.example` holds Cloudflare's published [test keys](https://developers.cloudflare.com/turnstile/troubleshooting/testing/): the secret always passes, and the matching test sitekey overrides the real one in `wrangler.jsonc` while you run locally. Open `http://localhost:8787`.
 
 ## Deploy your own
 
@@ -119,6 +119,10 @@ No framework and no build step (`ui.js` holds the translations; the privacy page
 ## Privacy
 
 The site stores nothing about you. Your browser talks to bash.ws (resolver detection), geojs.io (map locations), OpenStreetMap (tiles) and Cloudflare, and the ad-blocking check requests an advertising domain on purpose. Everything is listed in the [privacy policy](public/privacy.html).
+
+## Contributing
+
+Issues and pull requests are welcome. To add a resolver provider, add a line to `PROVIDERS` in `public/index.html`; to add a language, add its strings to `public/ui.js`.
 
 ## Credits
 
