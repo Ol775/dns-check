@@ -29,6 +29,9 @@ Made for people who send their DNS through [Control D](https://controld.com) and
 - **Provider detection.** Each resolver is named: Control D, Cloudflare (1.1.1.1), NextDNS, Google, Quad9, OpenDNS or AdGuard. Pick the one you expect, or leave it on auto-detect, and anything else turns the banner red.
 - **Provider check.** Direct confirmation for Cloudflare DNS, using the test host Cloudflare publishes.
 - **Map.** You, your resolvers and any stray resolver on a greyscale map, so the pins are the only colour.
+- **Connection tab.** What the Cloudflare edge sees about you (IP, network, location, protocol), a VPN / proxy / Tor check built from the network owner, proxy headers, the Tor exit list, WebRTC, timezone and address consistency, plus IPv6, latency, jitter and clock offset.
+- **Port check.** TCP check of *your own* public IP from Cloudflare's network, with presets or custom ports (up to 25). The target is never read from the request, so it can't be used to scan anyone else.
+- **DNS lookup.** A, AAAA, MX, TXT, NS, CNAME and reverse (PTR) lookups over DNS-over-HTTPS to 1.1.1.1.
 - **Filtering check.** Tells you whether an ad and tracker domain is being blocked.
 - **Test log.** The resolver table and a plain-text log of the run, like the results page on dnsleaktest.com.
 - **Bot check.** Cloudflare Turnstile guards the page, verified by the Worker, not just shown.
@@ -99,8 +102,11 @@ If the domain sits behind Cloudflare Access, add a bypass for it or visitors wil
 ## Project layout
 
 ```
-src/worker.js          Turnstile gate: /verify, signed cookie, public paths
-public/index.html      the whole app: one file, inline CSS and JS
+src/worker.js          Turnstile gate: /verify, signed cookie, security headers, routes
+src/net.js             /api/me, /api/ping, /api/ports (TCP port check of the caller's own IP)
+public/index.html      the page: markup and CSS
+public/app.js          DNS leak test
+public/tools.js        tabs, connection / VPN / proxy check, port check, DNS lookup
 public/privacy.html    privacy policy and terms
 public/ui.js           theme + language switchers and every UI string
 public/cookie-notice.js  informational cookie notice
@@ -117,12 +123,15 @@ No framework and no build step (`ui.js` holds the translations; the privacy page
 - NextDNS is recognised by the resolver's name only: its test page sends no CORS headers, so a browser can't read it for a direct confirmation.
 - It reports the resolvers that answered during the run. A leak that only shows up in certain apps, or when a VPN toggles, can be missed.
 - A VPN or iCloud Private Relay changes what you see.
+- VPN and proxy detection is a heuristic: it reads the network owner's name and a few signals, so it will miss some VPNs and flag some business or cloud connections. Treat it as a hint.
+- The port check tests TCP only (no UDP, so WireGuard and game servers can't be checked) and, being a check from outside, reports closed ports behind CGNAT or an un-forwarded router.
 - DNSSEC isn't tested: no public test host has a valid HTTPS certificate, so a browser can't tell a DNS refusal from a certificate error.
 
 ## Security
 
 - Every URL serves the challenge until a valid signed cookie is presented; forged, tampered and expired cookies are rejected (HttpOnly, Secure, SameSite=Lax, one hour).
 - Strict CSP (no inline scripts, an allow-list of the hosts the app talks to), HSTS, `X-Frame-Options: DENY`, `nosniff`, a referrer policy and a permissions policy on every response.
+- The port check only ever targets the caller's own IP, needs a same-origin POST with the access cookie, and is limited to 25 ports and 6 checks a minute per IP.
 - `/verify` caps the body (4 KB) and token (2048 characters), and is rate limited to 10 attempts a minute per IP. Cloudflare's rate limiter is per location and approximate: it blunts abuse rather than guaranteeing a hard cap.
 - Values from third-party services are escaped or set as plain text, never inserted as HTML.
 - The Turnstile script can't be pinned with an integrity hash, because Cloudflare serves it dynamically; Leaflet is pinned.

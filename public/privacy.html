@@ -49,10 +49,14 @@
       <tr><td>geojs.io</td><td>Places you and your resolvers on the map</td><td>Your IP address and your resolvers' IP addresses. <a href="https://www.geojs.io/">geojs.io</a></td></tr>
       <tr><td>OpenStreetMap</td><td>Map tiles</td><td>Your IP address and the area of the map you view. <a href="https://osmfoundation.org/wiki/Privacy_Policy">OSMF privacy policy</a></td></tr>
       <tr><td>cdnjs (Cloudflare)</td><td>Loads the Leaflet map library</td><td>Your IP address</td></tr>
+      <tr><td>api.ipify.org and api64.ipify.org</td><td>The Connection tab asks them which IPv4 and IPv6 address they see</td><td>Your IP address</td></tr>
+      <tr><td>cloudflare-dns.com (1.1.1.1)</td><td>The DNS lookup tab sends your query to Cloudflare's resolver over HTTPS</td><td>Your IP address and the name or IP address you look up</td></tr>
+      <tr><td>stun.cloudflare.com</td><td>The WebRTC check asks a STUN server which public address your browser can be reached on</td><td>Your IP address</td></tr>
       <tr><td>help.one.one.one.one (Cloudflare)</td><td>The Cloudflare DNS check tries to load it: the name only resolves on Cloudflare's resolvers</td><td>Your IP address</td></tr>
       <tr><td>doubleclick.net and example.com</td><td>The ad-blocking check tries to load each to see whether your DNS blocks it</td><td>Your IP address. doubleclick.net is an advertising domain, so if your DNS isn't blocking it, that request reaches Google's ad network.</td></tr>
     </tbody>
   </table>
+  <p>The Connection tab also reads what Cloudflare's network reports about your request (your IP, network, country, city and timezone) and compares your IP with the public Tor exit list, which the Worker downloads; no visitor data is sent to the Tor Project. The Ports tab makes the Worker open TCP connections from Cloudflare's network to <strong>your own IP address only</strong>; it never accepts a target from the request. Nothing from these checks is stored.</p>
   <p>I don't control these services, and what they do with your data is covered by their own policies.</p>
 
   <h2>Legal basis and your rights</h2>

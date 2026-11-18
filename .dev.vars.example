@@ -1,3 +1,5 @@
 TURNSTILE_SECRET=1x0000000000000000000000000000000AA
 TURNSTILE_SITEKEY=1x00000000000000000000AA
 COOKIE_SECRET=local-dev-only-change-me-0000000000000000
+# local only: lets you try the port check against a listener on your own machine (python3 -m http.server 9999 --bind 127.0.0.1)
+# TEST_TARGET_IP=127.0.0.1

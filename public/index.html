@@ -82,6 +82,21 @@
   .tbl { width:100%; border-collapse:collapse; margin-top:12px; font-size:.875rem; } .tbl th { text-align:left; color:var(--mut); font-weight:600; } .tbl th, .tbl td { padding:6px 8px 6px 0; border-bottom:1px solid var(--line); vertical-align:top; overflow-wrap:anywhere; }
   .tblwrap { overflow-x:auto; }
   pre.raw { margin:12px 0 0; padding:12px; background:var(--bg); border-radius:10px; font:12px/1.5 ui-monospace,Menlo,monospace; overflow-x:auto; white-space:pre-wrap; overflow-wrap:anywhere; color:var(--mut); }
+  [hidden] { display:none !important; }
+  .tabs { display:flex; gap:6px; margin:0 0 16px; overflow-x:auto; padding-bottom:2px; }
+  .tabs button { font:inherit; font-weight:600; padding:10px 16px; min-height:44px; border-radius:10px; border:1px solid var(--line); background:var(--card); color:var(--mut); cursor:pointer; white-space:nowrap; }
+  .tabs button:hover { color:var(--fg); }
+  .tabs button[aria-selected="true"] { background:var(--me); border-color:var(--me); color:var(--onme); }
+  .tabs button:focus-visible { outline:3px solid var(--me); outline-offset:2px; }
+  p.mut { color:var(--mut); margin:0 0 12px; font-size:.9rem; } p.err { color:var(--bad); margin:12px 0 0; }
+  .portform { display:flex; gap:8px; flex-wrap:wrap; align-items:center; margin:12px 0; }
+  .portform label { color:var(--mut); font-size:.9rem; }
+  .portform input { flex:1 1 220px; min-height:44px; padding:0 12px; border-radius:10px; border:1px solid var(--line); background:var(--bg); color:var(--fg); font:inherit; }
+  .portform input:focus-visible { outline:3px solid var(--me); outline-offset:2px; }
+  button.primary { font:inherit; font-weight:600; padding:10px 18px; min-height:44px; border-radius:10px; border:0; background:var(--me); color:var(--onme); cursor:pointer; }
+  button.primary:focus-visible { outline:3px solid var(--fg); outline-offset:2px; } button.primary:disabled { opacity:.6; cursor:wait; }
+  .st-open { color:var(--ok); font-weight:600; } .st-closed { color:var(--mut); } .st-filtered { color:var(--warn); font-weight:600; } .st-blocked { color:var(--bad); }
+  #tab-ports .chips, #tab-lookup .chips { margin-top:4px; }
   small.note { display:block; color:var(--mut); margin:20px 4px 0; font-size:.8rem; line-height:1.5; max-width:70ch; }
   small.note a { color:var(--me); }
   @media (prefers-reduced-motion: no-preference) { .hero.run .icon { animation:pulse 1.2s ease-in-out infinite; } @keyframes pulse { 50% { opacity:.45; } } }
@@ -93,6 +108,10 @@
     <div class="brand"><svg class="logo" viewBox="0 0 32 32" aria-hidden="true"><defs><linearGradient id="lg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#3b82f6"/><stop offset="1" stop-color="#0ea5a4"/></linearGradient></defs><rect width="32" height="32" rx="8" fill="url(#lg)"/><g fill="none" stroke="#fff" stroke-opacity=".3" stroke-width="1"><circle cx="16" cy="16.5" r="12"/><circle cx="16" cy="16.5" r="8.5"/></g><path d="M16 5.5 7.5 8.6v6.6c0 5.2 3.5 8.7 8.5 10.9 5-2.2 8.5-5.7 8.5-10.9V8.6z" fill="#fff"/><path d="m11.9 15.8 3 3 5.4-5.9" fill="none" stroke="#0e8fa6" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg><div><h1>DNS Check</h1><div class="stamp" id="stamp"></div></div></div>
     <div class="hdr-right"><div data-dnsck-controls></div><button id="rerun" data-i18n="rerun">Run again</button></div>
   </header>
+
+  <nav class="tabs" id="tabs" role="tablist"><button type="button" role="tab" id="t-dns" data-tab="dns" aria-controls="tab-dns" data-i18n="tab_dns">DNS leak</button><button type="button" role="tab" id="t-conn" data-tab="conn" aria-controls="tab-conn" data-i18n="tab_conn">Connection</button><button type="button" role="tab" id="t-ports" data-tab="ports" aria-controls="tab-ports" data-i18n="tab_ports">Ports</button><button type="button" role="tab" id="t-lookup" data-tab="lookup" aria-controls="tab-lookup" data-i18n="tab_lookup">DNS lookup</button></nav>
+
+  <div id="tab-dns" role="tabpanel" aria-labelledby="t-dns">
 
   <div class="expect" role="group" aria-labelledby="expectlbl"><span id="expectlbl" data-i18n="expecting">Expecting</span>
     <div class="chips" id="expect"><button type="button" data-v="auto" data-i18n="auto">Auto-detect</button><button type="button" data-v="controld">Control D</button><button type="button" data-v="cloudflare">Cloudflare (1.1.1.1)</button><button type="button" data-v="nextdns">NextDNS</button><button type="button" data-v="google">Google Public DNS</button><button type="button" data-v="quad9">Quad9</button><button type="button" data-v="opendns">OpenDNS (Cisco)</button><button type="button" data-v="adguard">AdGuard DNS</button></div></div>
@@ -115,12 +134,47 @@
     <div class="tblwrap"><table class="tbl"><thead><tr><th data-i18n="th_ip">IP</th><th data-i18n="th_prov">Provider</th><th data-i18n="th_country">Country</th><th data-i18n="th_result">Result</th></tr></thead><tbody id="logrows"></tbody></table></div>
     <pre class="raw" id="logtext" tabindex="0"></pre>
   </details></section>
+  <small class="note" data-i18n="note" data-n="10"></small>
 
-  <small class="note"><span data-i18n="note" data-n="10"></span> <a href="/privacy" data-i18n="privacy">Privacy and terms</a> · <a href="https://github.com/Ol775/dns-check" rel="noopener" data-i18n="source">Source on GitHub</a></small>
+  </div>
+
+  <div id="tab-conn" role="tabpanel" aria-labelledby="t-conn" hidden>
+    <section class="hero run" id="chero" aria-live="polite"></section>
+    <div class="grid">
+      <div class="stack">
+        <section class="card"><h2 data-i18n="h_ip">Your IP and network</h2><dl class="kv" id="cip"></dl></section>
+        <section class="card"><h2 data-i18n="h_q">Connection quality</h2><dl class="kv" id="cq"></dl></section>
+      </div>
+      <section class="card"><h2 data-i18n="h_sig">VPN and proxy signals</h2><ul class="res" id="csig"></ul></section>
+    </div>
+  </div>
+
+  <div id="tab-ports" role="tabpanel" aria-labelledby="t-ports" hidden>
+    <section class="card">
+      <h2 data-i18n="ports_h">Port check</h2>
+      <p class="mut" data-i18n="ports_note"></p>
+      <div class="chips" id="pchips" role="group"><button type="button" data-p="common" data-i18n="p_common">Common</button><button type="button" data-p="web" data-i18n="p_web">Web</button><button type="button" data-p="remote" data-i18n="p_remote">Remote access</button><button type="button" data-p="mail" data-i18n="p_mail">Mail</button><button type="button" data-p="media" data-i18n="p_media">Media servers</button></div>
+      <div class="portform"><label for="pcustom" data-i18n="ports_custom">Custom ports</label><input id="pcustom" inputmode="numeric" autocomplete="off" spellcheck="false" data-i18n-attr="placeholder:ports_ph" placeholder="e.g. 22, 8080, 3000-3005"><button type="button" class="primary" id="prun" data-i18n="ports_run">Check ports</button></div>
+      <div id="pout" aria-live="polite"></div>
+    </section>
+  </div>
+
+  <div id="tab-lookup" role="tabpanel" aria-labelledby="t-lookup" hidden>
+    <section class="card">
+      <h2 data-i18n="lk_h">DNS lookup</h2>
+      <p class="mut" data-i18n="lk_note"></p>
+      <form class="portform" id="lkform" novalidate><input id="lkin" type="text" autocomplete="off" autocapitalize="off" spellcheck="false" data-i18n-attr="placeholder:lk_ph;aria-label:lk_h" placeholder="example.com or an IP address"><button type="submit" class="primary" data-i18n="lk_run">Look up</button></form>
+      <div class="chips" id="lktypes" role="group"><button type="button" data-t="A">A</button><button type="button" data-t="AAAA">AAAA</button><button type="button" data-t="MX">MX</button><button type="button" data-t="TXT">TXT</button><button type="button" data-t="NS">NS</button><button type="button" data-t="CNAME">CNAME</button></div>
+      <div id="lkout" aria-live="polite"></div>
+    </section>
+  </div>
+
+  <small class="note"><a href="/privacy" data-i18n="privacy">Privacy and terms</a> · <a href="https://github.com/Ol775/dns-check" rel="noopener" data-i18n="source">Source on GitHub</a></small>
 </main>
 <script src="/ui.js"></script>
 <script src="/cookie-notice.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js" integrity="sha384-NElt3Op+9NBMCYaef5HxeJmU4Xeard/Lku8ek6hoPTvYkQPh3zLIrJP7KiRocsxO" crossorigin="anonymous"></script>
 <script src="/app.js"></script>
+<script src="/tools.js"></script>
 </body>
 </html>

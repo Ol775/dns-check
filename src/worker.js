@@ -1,3 +1,5 @@
+import { json, readJson, me, ping, ports } from './net.js';
+
 // Turnstile gate: the page is only served to browsers holding a signed cookie, issued after Cloudflare verifies a challenge token.
 const TTL = 3600; // seconds a solved challenge stays valid
 const MAX_BODY = 4096; // bytes accepted by /verify; a Turnstile token is at most 2048 characters
@@ -12,7 +14,7 @@ const CSP = [
   "script-src 'self' https://cdnjs.cloudflare.com https://challenges.cloudflare.com",
   "style-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com",
   "img-src 'self' data: https://tile.openstreetmap.org https://cdnjs.cloudflare.com",
-  "connect-src 'self' https://bash.ws https://*.bash.ws https://get.geojs.io https://help.one.one.one.one https://doubleclick.net https://example.com https://challenges.cloudflare.com",
+  "connect-src 'self' https://bash.ws https://*.bash.ws https://get.geojs.io https://api.ipify.org https://api64.ipify.org https://cloudflare-dns.com https://help.one.one.one.one https://doubleclick.net https://example.com https://challenges.cloudflare.com",
   "frame-src https://challenges.cloudflare.com",
   "base-uri 'none'", "form-action 'none'", "object-src 'none'", "frame-ancestors 'none'",
 ].join('; ');
@@ -38,22 +40,6 @@ async function hasPass(request, secret) {
   if (!m || Number(m[1]) < Date.now() / 1000) return false;
   const good = await sign(secret, m[1]);
   return good.length === m[2].length && crypto.subtle.timingSafeEqual(enc.encode(good), enc.encode(m[2])); // timingSafeEqual is a Workers extension
-}
-
-// Reads at most `max` bytes of the body as JSON; null if it is too big or not JSON (also covers requests with no Content-Length).
-async function readJson(request, max) {
-  if (Number(request.headers.get('Content-Length') || 0) > max) return null;
-  const reader = request.body?.getReader();
-  if (!reader) return null;
-  const chunks = []; let size = 0;
-  for (;;) {
-    const { done, value } = await reader.read();
-    if (done) break;
-    size += value.length;
-    if (size > max) { await reader.cancel(); return null; }
-    chunks.push(value);
-  }
-  try { return JSON.parse(new TextDecoder().decode(await new Blob(chunks).arrayBuffer())); } catch { return null; }
 }
 
 const challenge = sitekey => new Response(`<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
@@ -101,8 +87,19 @@ async function handle(request, env) {
     return new Response(null, { status: 204, headers: { 'Set-Cookie': `dnsck=${exp}.${await sign(env.COOKIE_SECRET, exp)}; Max-Age=${TTL}; Path=/; HttpOnly; Secure; SameSite=Lax` } });
   }
 
+  const pass = PUBLIC.has(pathname) || await hasPass(request, env.COOKIE_SECRET);
+
+  if (pathname.startsWith('/api/')) { // network tools: only for visitors who passed the challenge
+    if (!pass) return json({ error: 'unauthorised' }, 401);
+    if (pathname === '/api/ports') return ports(request, env);
+    if (request.method !== 'GET') return json({ error: 'method' }, 405);
+    if (pathname === '/api/me') return me(request);
+    if (pathname === '/api/ping') return ping();
+    return json({ error: 'not found' }, 404);
+  }
+
   if (request.method !== 'GET' && request.method !== 'HEAD') return new Response('Method not allowed', { status: 405 });
-  if (PUBLIC.has(pathname) || await hasPass(request, env.COOKIE_SECRET)) return env.ASSETS.fetch(request);
+  if (pass) return env.ASSETS.fetch(request);
   return challenge(env.TURNSTILE_SITEKEY);
 }
 
