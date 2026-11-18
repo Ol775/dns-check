@@ -93,7 +93,7 @@
  "th_dark": "Dark",
  "lang": "Language",
  "human": "Quick check that you're human, then the test runs.",
- "verify_fail": "Verification failed. Reload to try again.",
+ "verify_fail": "Verification failed.",
  "cn_text": "This site uses one essential cookie to remember you passed the human check for an hour. There are no tracking or advertising cookies.",
  "cn_ok": "Got it",
  "tab_dns": "DNS leak",
@@ -180,7 +180,13 @@
  "sg_addr_ok": "Every server sees the same IP.",
  "sg_addr_bad": "{a} and {b}: different servers see different IPs (split tunnelling or a proxy).",
  "sg_addr_unk": "Couldn't compare with a second server.",
- "ip_none": "Not available"
+ "ip_none": "Not available",
+ "ch_loading": "Loading the check…",
+ "ch_verified": "Verified. Starting the test…",
+ "ch_retry": "Try again",
+ "ch_toomany": "Too many attempts. Wait a minute, then try again.",
+ "ch_slow": "Taking longer than usual. If you use a content blocker, allow challenges.cloudflare.com, then try again.",
+ "ch_nojs": "JavaScript is required for the human check."
 };
   const DICT = {
  "fr": {
@@ -241,7 +247,7 @@
   "th_dark": "Sombre",
   "lang": "Langue",
   "human": "Une vérification rapide que vous êtes humain, puis le test démarre.",
-  "verify_fail": "La vérification a échoué. Rechargez la page pour réessayer.",
+  "verify_fail": "La vérification a échoué.",
   "cn_text": "Ce site utilise un seul cookie essentiel pour retenir pendant une heure que vous avez réussi la vérification. Aucun cookie de suivi ni publicitaire.",
   "cn_ok": "Compris",
   "tab_dns": "Fuite DNS",
@@ -296,7 +302,13 @@
   "lk_err": "Échec de la recherche",
   "lk_bad": "Saisissez un nom de domaine ou une adresse IP.",
   "th_value": "Valeur",
-  "ip_none": "Non disponible"
+  "ip_none": "Non disponible",
+  "ch_loading": "Chargement de la vérification…",
+  "ch_verified": "Vérifié. Lancement du test…",
+  "ch_retry": "Réessayer",
+  "ch_toomany": "Trop de tentatives. Patientez une minute, puis réessayez.",
+  "ch_slow": "Cela prend plus de temps que prévu. Si vous utilisez un bloqueur de contenu, autorisez challenges.cloudflare.com, puis réessayez.",
+  "ch_nojs": "JavaScript est nécessaire pour la vérification."
  },
  "de": {
   "last_run": "Letzter Test: {time}",
@@ -356,7 +368,7 @@
   "th_dark": "Dunkel",
   "lang": "Sprache",
   "human": "Kurze Prüfung, ob Sie ein Mensch sind, dann startet der Test.",
-  "verify_fail": "Die Prüfung ist fehlgeschlagen. Laden Sie die Seite neu und versuchen Sie es erneut.",
+  "verify_fail": "Die Prüfung ist fehlgeschlagen.",
   "cn_text": "Diese Website verwendet ein einziges notwendiges Cookie, das sich eine Stunde lang merkt, dass Sie die Prüfung bestanden haben. Es gibt keine Tracking- oder Werbe-Cookies.",
   "cn_ok": "Verstanden",
   "tab_dns": "DNS-Leak",
@@ -412,7 +424,13 @@
   "lk_bad": "Geben Sie einen Domainnamen oder eine IP-Adresse ein.",
   "th_type": "Typ",
   "th_value": "Wert",
-  "ip_none": "Nicht verfügbar"
+  "ip_none": "Nicht verfügbar",
+  "ch_loading": "Prüfung wird geladen…",
+  "ch_verified": "Bestätigt. Der Test startet…",
+  "ch_retry": "Erneut versuchen",
+  "ch_toomany": "Zu viele Versuche. Warten Sie eine Minute und versuchen Sie es dann erneut.",
+  "ch_slow": "Das dauert länger als üblich. Falls Sie einen Inhaltsblocker nutzen, erlauben Sie challenges.cloudflare.com und versuchen Sie es erneut.",
+  "ch_nojs": "Für die Prüfung ist JavaScript erforderlich."
  },
  "es": {
   "last_run": "Última prueba: {time}",
@@ -472,7 +490,7 @@
   "th_dark": "Oscuro",
   "lang": "Idioma",
   "human": "Una comprobación rápida de que eres una persona y después empieza la prueba.",
-  "verify_fail": "La verificación falló. Recarga la página para intentarlo de nuevo.",
+  "verify_fail": "La verificación falló.",
   "cn_text": "Este sitio usa una sola cookie esencial para recordar durante una hora que superaste la verificación. No hay cookies de seguimiento ni publicitarias.",
   "cn_ok": "Entendido",
   "tab_dns": "Fuga DNS",
@@ -530,7 +548,13 @@
   "lk_bad": "Introduce un nombre de dominio o una dirección IP.",
   "th_type": "Tipo",
   "th_value": "Valor",
-  "ip_none": "No disponible"
+  "ip_none": "No disponible",
+  "ch_loading": "Cargando la verificación…",
+  "ch_verified": "Verificado. Iniciando la prueba…",
+  "ch_retry": "Reintentar",
+  "ch_toomany": "Demasiados intentos. Espera un minuto y vuelve a intentarlo.",
+  "ch_slow": "Está tardando más de lo normal. Si usas un bloqueador de contenido, permite challenges.cloudflare.com y vuelve a intentarlo.",
+  "ch_nojs": "Se necesita JavaScript para la verificación."
  },
  "it": {
   "last_run": "Ultimo test: {time}",
@@ -590,7 +614,7 @@
   "th_dark": "Scuro",
   "lang": "Lingua",
   "human": "Un rapido controllo che tu sia una persona, poi parte il test.",
-  "verify_fail": "Verifica non riuscita. Ricarica la pagina per riprovare.",
+  "verify_fail": "Verifica non riuscita.",
   "cn_text": "Questo sito usa un solo cookie essenziale per ricordare per un'ora che hai superato la verifica. Nessun cookie di tracciamento o pubblicitario.",
   "cn_ok": "Ho capito",
   "tab_dns": "Perdite DNS",
@@ -647,7 +671,13 @@
   "lk_bad": "Inserisci un nome di dominio o un indirizzo IP.",
   "th_type": "Tipo",
   "th_value": "Valore",
-  "ip_none": "Non disponibile"
+  "ip_none": "Non disponibile",
+  "ch_loading": "Caricamento della verifica…",
+  "ch_verified": "Verificato. Avvio del test…",
+  "ch_retry": "Riprova",
+  "ch_toomany": "Troppi tentativi. Attendi un minuto e riprova.",
+  "ch_slow": "Ci sta mettendo più del solito. Se usi un blocco dei contenuti, consenti challenges.cloudflare.com e riprova.",
+  "ch_nojs": "Per la verifica serve JavaScript."
  },
  "pt": {
   "last_run": "Último teste: {time}",
@@ -707,7 +737,7 @@
   "th_dark": "Escuro",
   "lang": "Idioma",
   "human": "Uma verificação rápida de que você é humano e o teste começa.",
-  "verify_fail": "A verificação falhou. Recarregue a página para tentar de novo.",
+  "verify_fail": "A verificação falhou.",
   "cn_text": "Este site usa um único cookie essencial para lembrar por uma hora que você passou na verificação. Não há cookies de rastreamento nem de publicidade.",
   "cn_ok": "Entendi",
   "tab_dns": "Vazamento DNS",
@@ -764,7 +794,13 @@
   "lk_bad": "Informe um nome de domínio ou um endereço IP.",
   "th_type": "Tipo",
   "th_value": "Valor",
-  "ip_none": "Indisponível"
+  "ip_none": "Indisponível",
+  "ch_loading": "Carregando a verificação…",
+  "ch_verified": "Verificado. Iniciando o teste…",
+  "ch_retry": "Tentar de novo",
+  "ch_toomany": "Tentativas demais. Aguarde um minuto e tente de novo.",
+  "ch_slow": "Está demorando mais que o normal. Se você usa um bloqueador de conteúdo, permita challenges.cloudflare.com e tente de novo.",
+  "ch_nojs": "É necessário JavaScript para a verificação."
  },
  "nl": {
   "last_run": "Laatste test: {time}",
@@ -824,7 +860,7 @@
   "th_dark": "Donker",
   "lang": "Taal",
   "human": "Een snelle controle dat je een mens bent, daarna start de test.",
-  "verify_fail": "Verificatie mislukt. Laad de pagina opnieuw om het nog eens te proberen.",
+  "verify_fail": "Verificatie mislukt.",
   "cn_text": "Deze site gebruikt één noodzakelijke cookie om een uur te onthouden dat je de controle hebt doorstaan. Er zijn geen tracking- of advertentiecookies.",
   "cn_ok": "Begrepen",
   "tab_dns": "DNS-lek",
@@ -881,7 +917,13 @@
   "lk_bad": "Voer een domeinnaam of IP-adres in.",
   "th_type": "Type",
   "th_value": "Waarde",
-  "ip_none": "Niet beschikbaar"
+  "ip_none": "Niet beschikbaar",
+  "ch_loading": "De controle wordt geladen…",
+  "ch_verified": "Geverifieerd. De test start…",
+  "ch_retry": "Opnieuw proberen",
+  "ch_toomany": "Te veel pogingen. Wacht een minuut en probeer het dan opnieuw.",
+  "ch_slow": "Dit duurt langer dan normaal. Gebruik je een contentblocker, sta dan challenges.cloudflare.com toe en probeer het opnieuw.",
+  "ch_nojs": "Voor de controle is JavaScript nodig."
  },
  "ja": {
   "last_run": "前回のテスト: {time}",
@@ -939,7 +981,7 @@
   "th_dark": "ダーク",
   "lang": "言語",
   "human": "人間かどうかを簡単に確認してから、テストを開始します。",
-  "verify_fail": "確認に失敗しました。ページを再読み込みして、もう一度お試しください。",
+  "verify_fail": "確認に失敗しました。",
   "cn_text": "このサイトは、確認を通過したことを 1 時間記憶するための必須 Cookie を 1 つだけ使用します。トラッキング用や広告用の Cookie はありません。",
   "cn_ok": "了解",
   "tab_dns": "DNS 漏えい",
@@ -998,7 +1040,13 @@
   "lk_bad": "ドメイン名または IP アドレスを入力してください。",
   "th_type": "種類",
   "th_value": "値",
-  "ip_none": "利用不可"
+  "ip_none": "利用不可",
+  "ch_loading": "確認を読み込んでいます…",
+  "ch_verified": "確認できました。テストを開始します…",
+  "ch_retry": "再試行",
+  "ch_toomany": "試行回数が多すぎます。1 分ほど待ってからもう一度お試しください。",
+  "ch_slow": "通常より時間がかかっています。コンテンツブロッカーを使用している場合は challenges.cloudflare.com を許可して、もう一度お試しください。",
+  "ch_nojs": "人間確認には JavaScript が必要です。"
  },
  "ko": {
   "last_run": "마지막 테스트: {time}",
@@ -1056,7 +1104,7 @@
   "th_dark": "다크",
   "lang": "언어",
   "human": "사람인지 간단히 확인한 뒤 테스트를 시작합니다.",
-  "verify_fail": "확인에 실패했습니다. 페이지를 새로 고쳐 다시 시도하세요.",
+  "verify_fail": "확인에 실패했습니다.",
   "cn_text": "이 사이트는 확인을 통과했음을 1시간 동안 기억하기 위한 필수 쿠키를 하나만 사용합니다. 추적용이나 광고용 쿠키는 없습니다.",
   "cn_ok": "확인",
   "tab_dns": "DNS 누출",
@@ -1115,7 +1163,13 @@
   "lk_bad": "도메인 이름이나 IP 주소를 입력하세요.",
   "th_type": "유형",
   "th_value": "값",
-  "ip_none": "사용할 수 없음"
+  "ip_none": "사용할 수 없음",
+  "ch_loading": "확인 화면을 불러오는 중…",
+  "ch_verified": "확인되었습니다. 테스트를 시작하는 중…",
+  "ch_retry": "다시 시도",
+  "ch_toomany": "시도 횟수가 너무 많습니다. 1분 후 다시 시도하세요.",
+  "ch_slow": "평소보다 오래 걸리고 있습니다. 콘텐츠 차단기를 사용 중이라면 challenges.cloudflare.com을 허용한 뒤 다시 시도하세요.",
+  "ch_nojs": "사람 확인에는 JavaScript가 필요합니다."
  },
  "zh-Hans": {
   "last_run": "上次测试：{time}",
@@ -1173,7 +1227,7 @@
   "th_dark": "深色",
   "lang": "语言",
   "human": "先快速确认你是真人，然后开始测试。",
-  "verify_fail": "验证失败。请刷新页面后重试。",
+  "verify_fail": "验证失败。",
   "cn_text": "本站只使用一个必要的 Cookie，用于记住你已通过验证，有效期一小时。没有跟踪或广告 Cookie。",
   "cn_ok": "知道了",
   "tab_dns": "DNS 泄漏",
@@ -1232,7 +1286,13 @@
   "lk_bad": "请输入域名或 IP 地址。",
   "th_type": "类型",
   "th_value": "值",
-  "ip_none": "不可用"
+  "ip_none": "不可用",
+  "ch_loading": "正在加载验证…",
+  "ch_verified": "验证成功，正在开始测试…",
+  "ch_retry": "重试",
+  "ch_toomany": "尝试次数过多，请等待一分钟后再试。",
+  "ch_slow": "耗时比平时长。如果你使用内容拦截器，请允许 challenges.cloudflare.com 后重试。",
+  "ch_nojs": "人机验证需要 JavaScript。"
  },
  "zh-Hant": {
   "last_run": "上次測試：{time}",
@@ -1290,7 +1350,7 @@
   "th_dark": "深色",
   "lang": "語言",
   "human": "先快速確認你是真人，然後開始測試。",
-  "verify_fail": "驗證失敗。請重新整理頁面後再試一次。",
+  "verify_fail": "驗證失敗。",
   "cn_text": "本網站只使用一個必要的 Cookie，用來記住你已通過驗證，有效期限一小時。沒有追蹤或廣告 Cookie。",
   "cn_ok": "知道了",
   "tab_dns": "DNS 洩漏",
@@ -1349,7 +1409,13 @@
   "lk_bad": "請輸入網域名稱或 IP 位址。",
   "th_type": "類型",
   "th_value": "值",
-  "ip_none": "無法使用"
+  "ip_none": "無法使用",
+  "ch_loading": "正在載入驗證…",
+  "ch_verified": "驗證成功，正在開始測試…",
+  "ch_retry": "重試",
+  "ch_toomany": "嘗試次數過多，請等待一分鐘後再試。",
+  "ch_slow": "耗時比平常久。如果你使用內容封鎖器，請允許 challenges.cloudflare.com 後再試一次。",
+  "ch_nojs": "真人驗證需要 JavaScript。"
  }
 };
 
