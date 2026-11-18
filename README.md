@@ -44,6 +44,14 @@ Made for people who send their DNS through [Control D](https://controld.com) and
 <br><sub>A stray resolver gets flagged and shown on the map.</sub>
 </div>
 
+<div align="center">
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="docs/screenshot-connection-dark.png">
+  <img src="docs/screenshot-connection-light.png" alt="The Connection tab showing 'No VPN or proxy detected', IP and network details and six VPN and proxy signals" width="720">
+</picture>
+<br><sub>The Connection tab: your IP, network and six VPN and proxy signals. (Screenshot uses fictional data.)</sub>
+</div>
+
 ## How it works
 
 ```mermaid
