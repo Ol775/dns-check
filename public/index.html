@@ -9,11 +9,11 @@
 <style>
   :root {
     --bg:#f5f6f8; --fg:#16181c; --mut:#667085; --card:#fff; --line:#e4e7ec;
-    --ok:#12805c; --okbg:#e3f5ee; --bad:#c0262d; --badbg:#fdeaea; --warn:#a15c00; --warnbg:#fff3df; --me:#2563eb;
+    --onme:#fff; --ok:#12805c; --okbg:#e3f5ee; --bad:#c0262d; --badbg:#fdeaea; --warn:#a15c00; --warnbg:#fff3df; --me:#2563eb;
   }
   @media (prefers-color-scheme: dark) { :root {
     --bg:#0e0f12; --fg:#ececf0; --mut:#9aa1ad; --card:#17191d; --line:#2a2d33;
-    --ok:#4cc79a; --okbg:#10291f; --bad:#ff7b80; --badbg:#2d1517; --warn:#f0b45a; --warnbg:#2b2112; --me:#6ea0ff;
+    --onme:#0e0f12; --ok:#4cc79a; --okbg:#10291f; --bad:#ff7b80; --badbg:#2d1517; --warn:#f0b45a; --warnbg:#2b2112; --me:#6ea0ff;
   } }
   * { box-sizing:border-box; }
   body { margin:0; background:var(--bg); color:var(--fg); font:16px/1.5 system-ui,-apple-system,sans-serif; }
@@ -21,9 +21,12 @@
   header { display:flex; justify-content:space-between; align-items:center; gap:12px; margin-bottom:16px; }
   h1 { font-size:1.35rem; margin:0; }
   .brand { display:flex; align-items:center; gap:12px; } .logo { width:44px; height:44px; flex:none; }
-  .expect { display:flex; align-items:center; gap:10px; margin:0 0 12px; color:var(--mut); font-size:.9rem; }
-  .expect select { font:inherit; color:var(--fg); background:var(--card); border:1px solid var(--line); border-radius:10px; padding:8px 10px; min-height:44px; }
-  .expect select:focus-visible { outline:3px solid var(--me); outline-offset:2px; }
+  .expect { display:flex; align-items:center; flex-wrap:wrap; gap:8px 12px; margin:0 0 12px; color:var(--mut); font-size:.9rem; }
+  .chips { display:flex; flex-wrap:wrap; gap:8px; }
+  .chips button { font:inherit; font-size:.875rem; font-weight:500; padding:8px 14px; min-height:40px; border-radius:999px; border:1px solid var(--line); background:var(--card); color:var(--fg); cursor:pointer; }
+  .chips button:hover { border-color:var(--mut); }
+  .chips button[aria-pressed="true"] { background:var(--me); border-color:var(--me); color:var(--onme); font-weight:600; }
+  .chips button:focus-visible { outline:3px solid var(--me); outline-offset:2px; }
   .stamp { color:var(--mut); font-size:.85rem; }
   h2 { font-size:.75rem; letter-spacing:.06em; text-transform:uppercase; color:var(--mut); margin:0 0 10px; font-weight:600; }
   button { font:inherit; font-weight:600; padding:10px 16px; border-radius:10px; border:1px solid var(--line); background:var(--card); color:var(--fg); cursor:pointer; min-height:44px; }
@@ -75,8 +78,8 @@
     <button id="rerun">Run again</button>
   </header>
 
-  <div class="expect"><label for="expect">Expecting</label>
-    <select id="expect"><option value="auto">Auto-detect</option><option value="controld">Control D</option><option value="cloudflare">Cloudflare (1.1.1.1)</option><option value="nextdns">NextDNS</option><option value="google">Google Public DNS</option><option value="quad9">Quad9</option><option value="opendns">OpenDNS (Cisco)</option><option value="adguard">AdGuard DNS</option></select></div>
+  <div class="expect" role="group" aria-labelledby="expectlbl"><span id="expectlbl">Expecting</span>
+    <div class="chips" id="expect"><button type="button" data-v="auto">Auto-detect</button><button type="button" data-v="controld">Control D</button><button type="button" data-v="cloudflare">Cloudflare (1.1.1.1)</button><button type="button" data-v="nextdns">NextDNS</button><button type="button" data-v="google">Google Public DNS</button><button type="button" data-v="quad9">Quad9</button><button type="button" data-v="opendns">OpenDNS (Cisco)</button><button type="button" data-v="adguard">AdGuard DNS</button></div></div>
 
   <section class="hero run" id="hero" aria-live="polite">
     <div class="icon" aria-hidden="true">…</div>
@@ -128,8 +131,10 @@ const plural = (n, w) => `${n} ${w}${n === 1 ? '' : 's'}`;
 
 let expected = 'auto';
 try { expected = localStorage.getItem('dnsck-expect') || 'auto'; } catch {}
-expect.value = [...expect.options].some(o => o.value === expected) ? expected : 'auto';
-expected = expect.value;
+const chips = [...document.querySelectorAll('#expect [data-v]')];
+if (!chips.some(b => b.dataset.v === expected)) expected = 'auto';
+const markExpected = () => chips.forEach(b => b.setAttribute('aria-pressed', String(b.dataset.v === expected)));
+markExpected();
 
 // map: one instance, markers redrawn per render
 let map, layer;
@@ -139,7 +144,7 @@ function initMap() {
   layer = L.layerGroup().addTo(map);
   L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', { maxZoom: 12, attribution: '© OpenStreetMap contributors' }).addTo(map); // dark mode: see .leaflet-tile-pane filter
 }
-const pin = (p, colour, label) => L.marker(p, { title: label, icon: L.divIcon({ className: '', iconSize: [16, 16], html: `<div class="pin" style="background:${colour}"></div>` }) }).bindPopup(label).addTo(layer);
+const pin = (p, colour, label) => L.marker(p, { title: label, icon: L.divIcon({ className: '', iconSize: [16, 16], html: `<div class="pin" style="background:${colour}"></div>` }) }).bindPopup(Object.assign(document.createElement('span'), { textContent: label })).addTo(layer); // label comes from third-party APIs: text node, never HTML
 
 async function geo(ips) { // [{latitude,longitude,city}] in input order; failures just get no marker
   try {
@@ -260,7 +265,11 @@ async function run() {
   document.getElementById('stamp').textContent = `Last run ${new Date().toLocaleTimeString()}`;
   rerun.disabled = false;
 }
-expect.onchange = () => { expected = expect.value; try { localStorage.setItem('dnsck-expect', expected); } catch {} render(); };
+document.getElementById('expect').onclick = e => {
+  const b = e.target.closest('[data-v]'); if (!b) return;
+  expected = b.dataset.v; try { localStorage.setItem('dnsck-expect', expected); } catch {}
+  markExpected(); render();
+};
 rerun.onclick = run;
 initMap();
 run();
