@@ -32,7 +32,7 @@
   <h2>What this is</h2>
   <p>DNS Check is a free tool that shows which DNS resolvers your device is using, so you can see whether you're using Control D and whether anything else is answering. It's run by Ol775 as a personal project, with no accounts and no adverts. It isn't affiliated with Control D.</p>
 
-  <h2>What this site keeps</h2>
+  <h2 id="cookies">What this site keeps</h2>
   <ul>
     <li><strong>Nothing about you in a database.</strong> The site has no accounts, no analytics and no tracking, and it doesn't store test results.</li>
     <li><strong>One cookie, <code>dnsck</code>.</strong> After you pass the human check it records that you passed, so you aren't asked again for an hour. It holds an expiry time and a signature, no personal data. It's strictly necessary, HttpOnly, and expires after one hour.</li>
@@ -62,7 +62,7 @@
   <h2>Legal basis and your rights</h2>
   <p>Where UK or EU data protection law applies, the basis is legitimate interests: running a diagnostic tool you chose to use and keeping it free of bots. Because this site doesn't store personal data itself, there's nothing for me to export or delete, but you can ask. You can complain to the <a href="https://ico.org.uk/">Information Commissioner's Office</a>.</p>
 
-  <h2>Terms of use</h2>
+  <h2 id="terms">Terms of use</h2>
   <ul>
     <li>The tool is provided as is, with no warranty. Results are a guide and can be wrong or incomplete: a VPN, iCloud Private Relay, your network or an unusual setup can change them, and a resolver is only identified as Control D by its provider name.</li>
     <li>It isn't security or legal advice. Don't rely on it as proof of privacy or anonymity.</li>
@@ -73,6 +73,7 @@
   <h2>Contact</h2>
   <p>Questions or requests: message Ol775 on GitHub. The source code is public at <a href="https://github.com/Ol775/dns-check" rel="noopener">github.com/Ol775/dns-check</a>.</p>
 </main>
+<footer data-dnsck-footer="compact"></footer>
 <script src="/ui.js"></script>
 </body>
 </html>

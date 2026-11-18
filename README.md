@@ -35,7 +35,7 @@ Made for people who send their DNS through [Control D](https://controld.com) and
 - **Filtering check.** Tells you whether an ad and tracker domain is being blocked.
 - **Test log.** The resolver table and a plain-text log of the run, like the results page on dnsleaktest.com.
 - **Bot check.** Cloudflare Turnstile guards the page, verified by the Worker, not just shown.
-- **System, light and dark theme** switcher, and **11 languages** (English, French, German, Spanish, Italian, Brazilian Portuguese, Dutch, Japanese, Korean, Simplified and Traditional Chinese) with the same flag picker as my other projects. Phone friendly, no accounts, no analytics.
+- **System, light and dark theme** switcher, and **11 languages** (English, French, German, Spanish, Italian, Brazilian Portuguese, Dutch, Japanese, Korean, Simplified and Traditional Chinese) with the same flag picker as my other projects. A slowly drifting animated background (off for reduced-motion settings) and a footer with the tools, project and legal links. Phone friendly, no accounts, no analytics.
 
 <div align="center">
 <picture>

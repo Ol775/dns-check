@@ -201,5 +201,6 @@
   $('lktypes').onclick = e => { const b = e.target.closest('[data-t]'); if (!b) return; lkType = b.dataset.t; markType(); if ($('lkin').value.trim()) runLookup(); };
 
   document.addEventListener('dnsck:lang', () => { renderConn(); renderPorts(); renderLookup(); });
+  addEventListener('hashchange', () => { show(location.hash.slice(1)); scrollTo({ top: 0 }); }); // the footer's tool links
   show(location.hash.slice(1));
 })();

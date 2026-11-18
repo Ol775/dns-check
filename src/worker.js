@@ -51,8 +51,8 @@ const challenge = sitekey => new Response(`<!doctype html><html lang="en"><head>
   @media(prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0e0f12;--fg:#ececf0;--mut:#9aa1ad;--card:#17191d;--line:#2a2d33;--onme:#0e0f12;--me:#6ea0ff;--ok:#4cc79a;--bad:#ff7b80;--glow:rgba(110,160,255,.12)}}
   :root[data-theme="dark"]{color-scheme:dark;--bg:#0e0f12;--fg:#ececf0;--mut:#9aa1ad;--card:#17191d;--line:#2a2d33;--onme:#0e0f12;--me:#6ea0ff;--ok:#4cc79a;--bad:#ff7b80;--glow:rgba(110,160,255,.12)}
   *{box-sizing:border-box}
-  body{margin:0;min-height:100vh;display:grid;place-items:center;background:radial-gradient(60rem 36rem at 50% -8%,var(--glow),transparent 70%),var(--bg);color:var(--fg);font:16px/1.5 system-ui,-apple-system,"Hiragino Sans","PingFang SC","Noto Sans CJK SC",sans-serif;text-align:center;padding:16px}
-  main{width:100%;max-width:380px;background:var(--card);border:1px solid var(--line);border-radius:20px;padding:32px 24px 24px;box-shadow:0 10px 40px rgba(0,0,0,.08)}
+  body{margin:0;min-height:100vh;display:flex;flex-direction:column;background:var(--bg);color:var(--fg);font:16px/1.5 system-ui,-apple-system,"Hiragino Sans","PingFang SC","Noto Sans CJK SC",sans-serif;text-align:center}
+  main{width:calc(100% - 32px);max-width:380px;margin:auto;background:var(--card);border:1px solid var(--line);border-radius:20px;padding:32px 24px 24px;box-shadow:0 10px 40px rgba(0,0,0,.08)}
   .logo{position:relative;width:64px;height:64px;margin:0 auto 4px;display:grid;place-items:center}
   .logo svg{width:56px;height:56px;position:relative}
   .logo .ring{position:absolute;inset:0;border-radius:18px;border:2px solid var(--me);opacity:.35}
@@ -95,7 +95,8 @@ const challenge = sitekey => new Response(`<!doctype html><html lang="en"><head>
 <button type="button" id="retry" hidden data-i18n="ch_retry">Try again</button>
 <p class="late" data-i18n="ch_slow">Taking longer than usual. If you use a content blocker, allow challenges.cloudflare.com, then try again.</p>
 <noscript><style>.skel,.late{display:none}</style><p data-i18n="ch_nojs">JavaScript is required for the human check.</p></noscript>
-<p class="foot"><a href="/privacy" data-i18n="privacy">Privacy and terms</a> · <a href="https://github.com/Ol775/dns-check" rel="noopener" data-i18n="source">Source on GitHub</a></p></main>
+</main>
+<footer data-dnsck-footer="compact"></footer>
 <script src="/ui.js"></script><script src="/cookie-notice.js"></script></body></html>`, { headers: { 'content-type': 'text/html;charset=utf-8', 'cache-control': 'no-store' } });
 
 async function handle(request, env) {

@@ -186,7 +186,22 @@
  "ch_retry": "Try again",
  "ch_toomany": "Too many attempts. Wait a minute, then try again.",
  "ch_slow": "Taking longer than usual. If you use a content blocker, allow challenges.cloudflare.com, then try again.",
- "ch_nojs": "JavaScript is required for the human check."
+ "ch_nojs": "JavaScript is required for the human check.",
+ "f_desc": "Find out which DNS resolvers you use, whether you leak, and how your connection looks to the web. Nothing is stored.",
+ "f_oss": "Open source · MIT",
+ "f_tools": "Tools",
+ "f_project": "Project",
+ "f_legal": "Trust and legal",
+ "f_source": "Source code",
+ "f_docs": "Documentation",
+ "f_issue": "Report an issue",
+ "f_license": "License",
+ "f_privacy": "Privacy",
+ "f_terms": "Terms",
+ "f_cookies": "Cookies",
+ "f_security": "Security",
+ "f_credits": "Credits",
+ "f_unaff": "Not affiliated with Control D, Cloudflare, Inc. or Google LLC."
 };
   const DICT = {
  "fr": {
@@ -308,7 +323,22 @@
   "ch_retry": "Réessayer",
   "ch_toomany": "Trop de tentatives. Patientez une minute, puis réessayez.",
   "ch_slow": "Cela prend plus de temps que prévu. Si vous utilisez un bloqueur de contenu, autorisez challenges.cloudflare.com, puis réessayez.",
-  "ch_nojs": "JavaScript est nécessaire pour la vérification."
+  "ch_nojs": "JavaScript est nécessaire pour la vérification.",
+  "f_desc": "Découvrez quels résolveurs DNS vous utilisez, si vous avez des fuites et ce que votre connexion montre au web. Rien n'est conservé.",
+  "f_oss": "Open source · MIT",
+  "f_tools": "Outils",
+  "f_project": "Projet",
+  "f_legal": "Confiance et mentions",
+  "f_source": "Code source",
+  "f_docs": "Documentation",
+  "f_issue": "Signaler un problème",
+  "f_license": "Licence",
+  "f_privacy": "Confidentialité",
+  "f_terms": "Conditions",
+  "f_cookies": "Cookies",
+  "f_security": "Sécurité",
+  "f_credits": "Crédits",
+  "f_unaff": "Non affilié à Control D, Cloudflare, Inc. ni Google LLC."
  },
  "de": {
   "last_run": "Letzter Test: {time}",
@@ -430,7 +460,22 @@
   "ch_retry": "Erneut versuchen",
   "ch_toomany": "Zu viele Versuche. Warten Sie eine Minute und versuchen Sie es dann erneut.",
   "ch_slow": "Das dauert länger als üblich. Falls Sie einen Inhaltsblocker nutzen, erlauben Sie challenges.cloudflare.com und versuchen Sie es erneut.",
-  "ch_nojs": "Für die Prüfung ist JavaScript erforderlich."
+  "ch_nojs": "Für die Prüfung ist JavaScript erforderlich.",
+  "f_desc": "Finden Sie heraus, welche DNS-Resolver Sie nutzen, ob Sie Lecks haben und wie Ihre Verbindung im Web aussieht. Es wird nichts gespeichert.",
+  "f_oss": "Open Source · MIT",
+  "f_tools": "Tools",
+  "f_project": "Projekt",
+  "f_legal": "Vertrauen und Rechtliches",
+  "f_source": "Quellcode",
+  "f_docs": "Dokumentation",
+  "f_issue": "Problem melden",
+  "f_license": "Lizenz",
+  "f_privacy": "Datenschutz",
+  "f_terms": "Bedingungen",
+  "f_cookies": "Cookies",
+  "f_security": "Sicherheit",
+  "f_credits": "Danksagungen",
+  "f_unaff": "Nicht verbunden mit Control D, Cloudflare, Inc. oder Google LLC."
  },
  "es": {
   "last_run": "Última prueba: {time}",
@@ -554,7 +599,22 @@
   "ch_retry": "Reintentar",
   "ch_toomany": "Demasiados intentos. Espera un minuto y vuelve a intentarlo.",
   "ch_slow": "Está tardando más de lo normal. Si usas un bloqueador de contenido, permite challenges.cloudflare.com y vuelve a intentarlo.",
-  "ch_nojs": "Se necesita JavaScript para la verificación."
+  "ch_nojs": "Se necesita JavaScript para la verificación.",
+  "f_desc": "Descubre qué resolvedores DNS usas, si tienes fugas y cómo ve la web tu conexión. No se guarda nada.",
+  "f_oss": "Código abierto · MIT",
+  "f_tools": "Herramientas",
+  "f_project": "Proyecto",
+  "f_legal": "Confianza y legal",
+  "f_source": "Código fuente",
+  "f_docs": "Documentación",
+  "f_issue": "Informar de un problema",
+  "f_license": "Licencia",
+  "f_privacy": "Privacidad",
+  "f_terms": "Condiciones",
+  "f_cookies": "Cookies",
+  "f_security": "Seguridad",
+  "f_credits": "Créditos",
+  "f_unaff": "Sin afiliación con Control D, Cloudflare, Inc. ni Google LLC."
  },
  "it": {
   "last_run": "Ultimo test: {time}",
@@ -677,7 +737,22 @@
   "ch_retry": "Riprova",
   "ch_toomany": "Troppi tentativi. Attendi un minuto e riprova.",
   "ch_slow": "Ci sta mettendo più del solito. Se usi un blocco dei contenuti, consenti challenges.cloudflare.com e riprova.",
-  "ch_nojs": "Per la verifica serve JavaScript."
+  "ch_nojs": "Per la verifica serve JavaScript.",
+  "f_desc": "Scopri quali resolver DNS usi, se hai perdite e come appare la tua connessione sul web. Non viene salvato nulla.",
+  "f_oss": "Open source · MIT",
+  "f_tools": "Strumenti",
+  "f_project": "Progetto",
+  "f_legal": "Fiducia e note legali",
+  "f_source": "Codice sorgente",
+  "f_docs": "Documentazione",
+  "f_issue": "Segnala un problema",
+  "f_license": "Licenza",
+  "f_privacy": "Privacy",
+  "f_terms": "Condizioni",
+  "f_cookies": "Cookie",
+  "f_security": "Sicurezza",
+  "f_credits": "Crediti",
+  "f_unaff": "Non affiliato a Control D, Cloudflare, Inc. o Google LLC."
  },
  "pt": {
   "last_run": "Último teste: {time}",
@@ -800,7 +875,22 @@
   "ch_retry": "Tentar de novo",
   "ch_toomany": "Tentativas demais. Aguarde um minuto e tente de novo.",
   "ch_slow": "Está demorando mais que o normal. Se você usa um bloqueador de conteúdo, permita challenges.cloudflare.com e tente de novo.",
-  "ch_nojs": "É necessário JavaScript para a verificação."
+  "ch_nojs": "É necessário JavaScript para a verificação.",
+  "f_desc": "Descubra quais resolvedores DNS você usa, se há vazamentos e como sua conexão aparece para a web. Nada é armazenado.",
+  "f_oss": "Código aberto · MIT",
+  "f_tools": "Ferramentas",
+  "f_project": "Projeto",
+  "f_legal": "Confiança e jurídico",
+  "f_source": "Código-fonte",
+  "f_docs": "Documentação",
+  "f_issue": "Relatar um problema",
+  "f_license": "Licença",
+  "f_privacy": "Privacidade",
+  "f_terms": "Termos",
+  "f_cookies": "Cookies",
+  "f_security": "Segurança",
+  "f_credits": "Créditos",
+  "f_unaff": "Sem afiliação com Control D, Cloudflare, Inc. ou Google LLC."
  },
  "nl": {
   "last_run": "Laatste test: {time}",
@@ -923,7 +1013,22 @@
   "ch_retry": "Opnieuw proberen",
   "ch_toomany": "Te veel pogingen. Wacht een minuut en probeer het dan opnieuw.",
   "ch_slow": "Dit duurt langer dan normaal. Gebruik je een contentblocker, sta dan challenges.cloudflare.com toe en probeer het opnieuw.",
-  "ch_nojs": "Voor de controle is JavaScript nodig."
+  "ch_nojs": "Voor de controle is JavaScript nodig.",
+  "f_desc": "Ontdek welke DNS-resolvers je gebruikt, of je lekt en hoe je verbinding op het web overkomt. Er wordt niets opgeslagen.",
+  "f_oss": "Open source · MIT",
+  "f_tools": "Hulpmiddelen",
+  "f_project": "Project",
+  "f_legal": "Vertrouwen en juridisch",
+  "f_source": "Broncode",
+  "f_docs": "Documentatie",
+  "f_issue": "Probleem melden",
+  "f_license": "Licentie",
+  "f_privacy": "Privacy",
+  "f_terms": "Voorwaarden",
+  "f_cookies": "Cookies",
+  "f_security": "Beveiliging",
+  "f_credits": "Dankbetuigingen",
+  "f_unaff": "Niet gelieerd aan Control D, Cloudflare, Inc. of Google LLC."
  },
  "ja": {
   "last_run": "前回のテスト: {time}",
@@ -1046,7 +1151,22 @@
   "ch_retry": "再試行",
   "ch_toomany": "試行回数が多すぎます。1 分ほど待ってからもう一度お試しください。",
   "ch_slow": "通常より時間がかかっています。コンテンツブロッカーを使用している場合は challenges.cloudflare.com を許可して、もう一度お試しください。",
-  "ch_nojs": "人間確認には JavaScript が必要です。"
+  "ch_nojs": "人間確認には JavaScript が必要です。",
+  "f_desc": "どの DNS リゾルバを使っているか、漏えいがないか、接続がウェブからどう見えるかを確認できます。何も保存されません。",
+  "f_oss": "オープンソース · MIT",
+  "f_tools": "ツール",
+  "f_project": "プロジェクト",
+  "f_legal": "信頼と法的情報",
+  "f_source": "ソースコード",
+  "f_docs": "ドキュメント",
+  "f_issue": "問題を報告",
+  "f_license": "ライセンス",
+  "f_privacy": "プライバシー",
+  "f_terms": "利用条件",
+  "f_cookies": "Cookie",
+  "f_security": "セキュリティ",
+  "f_credits": "クレジット",
+  "f_unaff": "Control D、Cloudflare, Inc.、Google LLC とは提携していません。"
  },
  "ko": {
   "last_run": "마지막 테스트: {time}",
@@ -1169,7 +1289,22 @@
   "ch_retry": "다시 시도",
   "ch_toomany": "시도 횟수가 너무 많습니다. 1분 후 다시 시도하세요.",
   "ch_slow": "평소보다 오래 걸리고 있습니다. 콘텐츠 차단기를 사용 중이라면 challenges.cloudflare.com을 허용한 뒤 다시 시도하세요.",
-  "ch_nojs": "사람 확인에는 JavaScript가 필요합니다."
+  "ch_nojs": "사람 확인에는 JavaScript가 필요합니다.",
+  "f_desc": "어떤 DNS 리졸버를 쓰는지, 누출이 없는지, 내 연결이 웹에 어떻게 보이는지 확인하세요. 아무것도 저장되지 않습니다.",
+  "f_oss": "오픈 소스 · MIT",
+  "f_tools": "도구",
+  "f_project": "프로젝트",
+  "f_legal": "신뢰 및 법적 고지",
+  "f_source": "소스 코드",
+  "f_docs": "문서",
+  "f_issue": "문제 신고",
+  "f_license": "라이선스",
+  "f_privacy": "개인정보",
+  "f_terms": "약관",
+  "f_cookies": "쿠키",
+  "f_security": "보안",
+  "f_credits": "크레딧",
+  "f_unaff": "Control D, Cloudflare, Inc., Google LLC와 제휴 관계가 없습니다."
  },
  "zh-Hans": {
   "last_run": "上次测试：{time}",
@@ -1292,7 +1427,22 @@
   "ch_retry": "重试",
   "ch_toomany": "尝试次数过多，请等待一分钟后再试。",
   "ch_slow": "耗时比平时长。如果你使用内容拦截器，请允许 challenges.cloudflare.com 后重试。",
-  "ch_nojs": "人机验证需要 JavaScript。"
+  "ch_nojs": "人机验证需要 JavaScript。",
+  "f_desc": "查看你在使用哪些 DNS 解析器、是否存在泄漏，以及你的连接在网络上是什么样子。不保存任何数据。",
+  "f_oss": "开源 · MIT",
+  "f_tools": "工具",
+  "f_project": "项目",
+  "f_legal": "信任与法律",
+  "f_source": "源代码",
+  "f_docs": "文档",
+  "f_issue": "反馈问题",
+  "f_license": "许可证",
+  "f_privacy": "隐私",
+  "f_terms": "条款",
+  "f_cookies": "Cookie",
+  "f_security": "安全",
+  "f_credits": "致谢",
+  "f_unaff": "与 Control D、Cloudflare, Inc. 或 Google LLC 无关联。"
  },
  "zh-Hant": {
   "last_run": "上次測試：{time}",
@@ -1415,7 +1565,22 @@
   "ch_retry": "重試",
   "ch_toomany": "嘗試次數過多，請等待一分鐘後再試。",
   "ch_slow": "耗時比平常久。如果你使用內容封鎖器，請允許 challenges.cloudflare.com 後再試一次。",
-  "ch_nojs": "真人驗證需要 JavaScript。"
+  "ch_nojs": "真人驗證需要 JavaScript。",
+  "f_desc": "查看你正在使用哪些 DNS 解析器、是否有洩漏，以及你的連線在網路上是什麼樣子。不會儲存任何資料。",
+  "f_oss": "開放原始碼 · MIT",
+  "f_tools": "工具",
+  "f_project": "專案",
+  "f_legal": "信任與法律",
+  "f_source": "原始碼",
+  "f_docs": "文件",
+  "f_issue": "回報問題",
+  "f_license": "授權",
+  "f_privacy": "隱私權",
+  "f_terms": "條款",
+  "f_cookies": "Cookie",
+  "f_security": "安全性",
+  "f_credits": "致謝",
+  "f_unaff": "與 Control D、Cloudflare, Inc. 或 Google LLC 無關聯。"
  }
 };
 
@@ -1462,6 +1627,38 @@
     .dc-menu button{all:unset;box-sizing:border-box;display:flex;align-items:center;gap:10px;width:100%;min-height:44px;padding:0 12px;border-radius:10px;font:500 14px/1.2 system-ui,sans-serif;cursor:pointer}
     .dc-menu button:hover{background:var(--bg,#f5f6f8)}.dc-menu button[aria-current="true"]{font-weight:700;background:var(--bg,#f5f6f8)}
     .dc-menu button:focus-visible{outline:3px solid var(--me,#2563eb);outline-offset:-3px}
+
+    /* animated background: two big soft glows drifting slowly behind everything */
+    :root{--dc-a:rgba(37,99,235,.17);--dc-b:rgba(14,165,164,.15)}
+    @media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--dc-a:rgba(110,160,255,.15);--dc-b:rgba(76,199,154,.11)}}
+    :root[data-theme="dark"]{--dc-a:rgba(110,160,255,.15);--dc-b:rgba(76,199,154,.11)}
+    body{position:relative;isolation:isolate}
+    body::before,body::after{content:"";position:fixed;z-index:-1;pointer-events:none;border-radius:50%;will-change:transform}
+    body::before{width:72vmax;height:72vmax;left:-22vmax;top:-30vmax;background:radial-gradient(closest-side,var(--dc-a),transparent);animation:dcA 36s ease-in-out infinite alternate}
+    body::after{width:62vmax;height:62vmax;right:-22vmax;bottom:-30vmax;background:radial-gradient(closest-side,var(--dc-b),transparent);animation:dcB 44s ease-in-out infinite alternate}
+    @keyframes dcA{to{transform:translate(20vmax,14vmax) scale(1.18)}}
+    @keyframes dcB{to{transform:translate(-18vmax,-12vmax) scale(1.22)}}
+    @media (prefers-reduced-motion:reduce){body::before,body::after{animation:none}}
+    /* footer */
+    .dc-footer{margin-top:56px;border-top:1px solid var(--line,#e4e7ec);background:color-mix(in srgb,var(--card,#fff) 55%,transparent);backdrop-filter:blur(6px)}
+    .dc-foot{max-width:1000px;margin:0 auto;padding:40px 16px 22px;text-align:left}
+    .dc-grid{display:grid;grid-template-columns:1.6fr 1fr 1fr 1fr;gap:32px}
+    .dc-grid.compact{grid-template-columns:1.6fr 1fr 1fr}
+    @media (max-width:760px){.dc-grid,.dc-grid.compact{grid-template-columns:1fr 1fr}.dc-brandcol{grid-column:1/-1}}
+    .dc-brand{display:flex;align-items:center;gap:10px;font-weight:700;font-size:1.25rem;color:var(--fg,#16181c)}
+    .dc-brand img{width:32px;height:32px;border-radius:8px}
+    .dc-desc{color:var(--mut,#667085);margin:12px 0 16px;max-width:38ch;font-size:.92rem;line-height:1.55}
+    .dc-pill{display:inline-flex;align-items:center;gap:8px;min-height:40px;padding:0 14px;border:1px solid var(--line,#e4e7ec);border-radius:999px;color:var(--fg,#16181c);background:var(--card,#fff);text-decoration:none;font-size:.88rem}
+    .dc-pill i{width:8px;height:8px;border-radius:50%;background:var(--ok,#12805c)}
+    .dc-pill:hover{border-color:var(--mut,#667085)}
+    .dc-col h3{margin:0 0 10px;font-size:.78rem;letter-spacing:.09em;text-transform:uppercase;color:var(--fg,#16181c)}
+    .dc-col a{display:block;padding:7px 0;color:var(--mut,#667085);text-decoration:none;font-size:.93rem}
+    .dc-col a:hover{color:var(--fg,#16181c);text-decoration:underline}
+    .dc-footer a:focus-visible{outline:3px solid var(--me,#2563eb);outline-offset:2px;border-radius:4px}
+    .dc-bar{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px 20px;margin-top:30px;padding-top:20px;border-top:1px solid var(--line,#e4e7ec);color:var(--mut,#667085);font-size:.85rem}
+    .dc-bar .legal{display:flex;gap:6px 22px;flex-wrap:wrap}
+    .dc-bar .dc{margin-left:auto}
+    .dc-footer .dc-menu{top:auto;bottom:calc(100% + 6px)}
     @media (prefers-reduced-motion:reduce){.dc-lang .dc-chev{transition:none}}`;
   document.head.append(css);
 
@@ -1471,7 +1668,29 @@
       `<details class="dc-lang" translate="no"><summary aria-label="${t('lang')} ${code}">${flag(f)}<span>${code}</span><svg class="dc-chev" viewBox="0 0 16 16" width="12" height="12" aria-hidden="true"><path d="M4 10l4-4 4 4" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></summary>` +
       `<ul class="dc-menu">${Object.entries(LANGS).map(([id, [name, , fl]]) => `<li><button type="button" data-lang-choice="${id}"${id === lang ? ' aria-current="true"' : ''}>${flag(fl)}<span>${name}</span></button></li>`).join('')}</ul></details>`;
   }
-  function mount() { document.querySelectorAll('[data-dnsck-controls]').forEach(el => { el.className = 'dc'; el.innerHTML = build(); if (el.dataset.dnsckControls === 'theme') el.querySelector('.dc-lang')?.remove(); }); }
+  // ---- footer (text and links only ever set as text / hrefs from this file) ----
+  const GH = 'https://github.com/Ol775/dns-check';
+  function footer(el) {
+    const compact = el.dataset.dnsckFooter === 'compact';
+    const mk = (tag, cls, text) => { const x = document.createElement(tag); if (cls) x.className = cls; if (text != null) x.textContent = text; return x; };
+    const link = (href, text, ext) => { const a = mk('a', null, text); a.href = href; if (ext) a.rel = 'noopener'; return a; };
+    const col = (title, links) => { const d = mk('div', 'dc-col'); d.append(mk('h3', null, title), ...links); return d; };
+    const brand = mk('div', 'dc-brandcol');
+    const b = mk('div', 'dc-brand'); const img = mk('img'); img.src = '/icon.svg'; img.alt = ''; img.width = 32; img.height = 32; b.append(img, mk('span', null, 'DNS Check'));
+    const pill = link(GH, '', true); pill.className = 'dc-pill'; pill.append(mk('i'), mk('span', null, t('f_oss')));
+    brand.append(b, mk('p', 'dc-desc', t('f_desc')), pill);
+    const grid = mk('div', 'dc-grid' + (compact ? ' compact' : ''));
+    grid.append(brand);
+    if (!compact) grid.append(col(t('f_tools'), [['dns', 'tab_dns'], ['conn', 'tab_conn'], ['ports', 'tab_ports'], ['lookup', 'tab_lookup']].map(([id, k]) => link('#' + id, t(k)))));
+    grid.append(col(t('f_project'), [link(GH, t('f_source'), true), link(GH + '#readme', t('f_docs'), true), link(GH + '/issues', t('f_issue'), true), link(GH + '/blob/main/LICENSE', t('f_license'), true)]));
+    grid.append(col(t('f_legal'), [link('/privacy', t('f_privacy')), link('/privacy#terms', t('f_terms')), link('/privacy#cookies', t('f_cookies')), link(GH + '#security', t('f_security'), true), link(GH + '#credits', t('f_credits'), true)]));
+    const ctl = mk('div'); ctl.dataset.dnsckControls = '';
+    const legal = mk('div', 'legal'); legal.append(mk('span', null, `© ${new Date().getFullYear()} Peacock665.co.uk`), mk('span', null, t('f_unaff')));
+    const bar = mk('div', 'dc-bar'); bar.append(legal, ctl);
+    const inner = mk('div', 'dc-foot'); inner.append(grid, bar);
+    el.className = 'dc-footer'; el.replaceChildren(inner);
+  }
+  function mount() { document.querySelectorAll('[data-dnsck-footer]').forEach(footer); document.querySelectorAll('[data-dnsck-controls]').forEach(el => { el.className = 'dc'; el.innerHTML = build(); if (el.dataset.dnsckControls === 'theme') el.querySelector('.dc-lang')?.remove(); }); }
 
   document.addEventListener('click', e => {
     const th = e.target.closest?.('[data-theme-choice]');
